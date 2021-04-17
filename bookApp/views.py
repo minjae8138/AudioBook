@@ -13,3 +13,6 @@ from django.db.models import Sum, F
 def index(request):
 
     return render(request, 'page1.html')
+
+# 음성서비스 페이지
+

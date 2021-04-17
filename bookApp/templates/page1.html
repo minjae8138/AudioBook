@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 {% load static%}
 {% include 'header.html' %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AudioBook</title>
-<!--    reset.css   -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
-    />
+
 <!--  page1에 적용하는 css-->
     <link href="{% static 'css/style.css'%}" rel="stylesheet">
   </head>
 
-
+<!-- *************************** book : 화면 START *************************  -->
 
     <div class="main">
       <div class="ment">동화책을 올려주세요 !!!</div>
@@ -35,11 +25,8 @@
       <!-- 데이터 전송 -->
     </div>
 
-
-
-
-</body>
+<!-- *************************** book : 화면 END ***************************  -->
   {% include 'footer.html' %}
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script  src="{% static 'js/drag.js'%}"></script>
-</html>
+
