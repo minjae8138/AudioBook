@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 from django.db.models import Aggregate, CharField
 from django.db.models import Sum, F
 
+
+# 기본페이지
 def index(request):
 
     return render(request, 'page1.html')
