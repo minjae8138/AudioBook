@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookApp/static/css/basic.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookApp/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookApp/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
