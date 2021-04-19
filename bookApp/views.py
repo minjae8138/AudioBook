@@ -1,12 +1,15 @@
 from django.http import JsonResponse
 from django.shortcuts import render , redirect
 from .models import *
-from django.core.paginator import *
-from datetime import datetime
-from django.db.models import Max, functions
-from django.core.paginator import Paginator
-from django.db.models import Aggregate, CharField
-from django.db.models import Sum, F
+
+# 테스트용도
+def test(request):
+    users = UserTb.objects.all()
+    for user in users:
+        print(user.user_id)
+        print(user.name)
+    return render(request, 'test.html', {'posts':users})
+
 
 
 # 기본페이지

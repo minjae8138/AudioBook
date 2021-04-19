@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import *
 
-# Register your models here.
 
 # admin.site.register(index)
+from bookApp.models import BookTb, ContentTb, UserTb
+
+
+# Register your models here.
+admin.site.register(BookTb)
+admin.site.register(ContentTb)
+admin.site.register(UserTb)
