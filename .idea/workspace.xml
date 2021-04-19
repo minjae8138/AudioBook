@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="" />
+=======
+<<<<<<< HEAD
+    <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/audio_book.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/audio_book.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/bookApp/templates/page2.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/templates/page2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+=======
+>>>>>>> develop
+    </list>
+=======
+    <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="" />
+>>>>>>> develop
+>>>>>>> 0c6feae5dfe24675066d8cba2f412a325b1dafca
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
