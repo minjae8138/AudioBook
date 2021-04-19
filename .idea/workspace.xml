@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/audio_book.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/audio_book.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -13,6 +14,9 @@
 =======
 >>>>>>> develop
     </list>
+=======
+    <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="" />
+>>>>>>> develop
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
