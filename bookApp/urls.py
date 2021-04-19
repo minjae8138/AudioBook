@@ -8,6 +8,7 @@ urlpatterns = [
 # -----------------------------------------#
     # index  / login
     path('index/', views.index, name='index'),
+    path('read/', views.read, name='read'),
 
 ]
 

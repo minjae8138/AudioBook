@@ -15,4 +15,5 @@ def index(request):
     return render(request, 'page1.html')
 
 # 음성서비스 페이지
-
+def read(request):
+    return render(request, 'page2.html')
