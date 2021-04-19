@@ -5,10 +5,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/audio_book.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/audio_book.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/bookApp/templates/page2.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/templates/page2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+=======
+>>>>>>> develop
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
