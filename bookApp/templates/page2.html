@@ -4,6 +4,194 @@
 
 <!-- *************************** book : 화면 START *************************  -->
 
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: 0.3fr 3fr 1fr 0.3fr;
+        grid-template-rows: 1.5fr 5fr 0.5fr;
+        gap: 0.5px 0.5px;
+        grid-template-areas:
+            ". . . ."
+            ". left right ."
+            ". . . .";
+    }
+    .left { grid-area: left; }
+    .right { grid-area: right; }
+
+    .top-1 {
+        margin: 20px;
+    }
+    img {
+        max-width: 100%;
+<!--        object-fit: fill;-->
+        height: 250px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        /* width: 50%; */
+    }
+
+    audio {
+        max-width: 100%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .container-btn {
+        margin: 50px;
+        position: relative;
+    }
+    .bottom-1 {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    .btn-male {
+        width: 200px;
+        height: 33px;
+        margin-right: 20px;
+    }
+    .btn-female {
+        width: 200px;
+        height: 33px;
+    }
+    .clicked {
+        background-color:rgb(48, 19, 116);
+        color: white;
+    }
+
+    .hidden {
+        display: none;
+    }
+    div.box {
+        height: 50px;
+        border: 1px solid #bcbcbc;
+        background-color: #dadada;
+    }
+
+    .container-list {
+        padding: 10px;
+        height: 324px;
+        border: thick double;
+        border-color: black;
+    }
+    .top-list {
+        margin-left: 10px;
+        margin: 3px;
+        padding: 3px 15px;
+        background-color: cornsilk;
+        color: black;
+    }
+    .bottom-list {
+        margin: 3px;
+        padding: 5px;
+        background-color: white;
+
+    }
+
+</style>
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+<div class="container">
+  <div class="left">
+    <div class="top">
+      <div class="container-male">
+        <div class="top-1" name="image">
+          <img src="{% static 'src/wolf.jpg'%}">
+        </div>
+        <div class="top-2" name="audio bar">
+          <audio controls>
+            <source src="{% static 'src/sample_audio_1.mp3'%}">
+          </audio>
+        </div>
+      </div>
+      <div class="container-female hidden">
+        <div class="top-1" name="image">
+          <img src="{% static 'src/red.jpg'%}">
+        </div>
+        <div class="top-2" name="audio bar">
+          <audio controls>
+            <source src="{% static 'src/sample_audio_2.mp3'%}">
+          </audio>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="container-btn">
+        <div class="bottom-1" name="speakers-grp">
+          <button class="btn-male clicked">남자</button>
+          <button class="btn-female">여자</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="container-list">
+      <div class="top-list">
+        <h3>내 동화 목록</h3>
+      </div>
+      <div class="bottom-list">
+        <ol>
+          <a href><li class="list-item">빨간모자</li></a>
+          <a href><li class="list-item">아기돼지 삼형제</li></a>
+          <a href><li class="list-item">금도끼 은도끼</li></a>
+          <a href><li class="list-item">백설공주</li></a>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
+<script>
+
+    // 남자, 여자 전환될 때 소리 자동으로 멈추게 하기(changeEvent&evenListner)
+    // 버튼 색깔 다르게 하기
+
+        $(document).ready( function() {
+            $('button.btn-male').click( function(){
+                $('div.container-female').hide();
+                $('div.container-male').show();
+                $(this).addClass('clicked');
+                $('.btn-female').removeClass('clicked');
+            });
+            $('button.btn-female').click( function(){
+                $('div.container-male').hide();
+                $('div.container-female').show();
+                $(this).addClass('clicked');
+                $('.btn-male').removeClass('clicked');
+            });
+        });
+
+
+    </script>
+
+</body>
+
+
+
+
+</html>
+
+
 
 
 
