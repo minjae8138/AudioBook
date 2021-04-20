@@ -160,6 +160,7 @@ Thumbs.db
 
 # workspace
 .idea/workspace.xml
+idea/work
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
