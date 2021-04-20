@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'audio_book.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'book_db',
+        'USER': 'book',
+        'PASSWORD': 'Book12341234!',
+        'HOST': '116.44.136.77',
+        'PORT': 3306
     }
 }
 

@@ -3,8 +3,19 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render , redirect
 from .forms import UploadFileForm
 from .models import *
+
 from django.core.paginator import *
 from datetime import datetime
+
+
+# 테스트용도
+def test(request):
+    users = UserTb.objects.all()
+    for user in users:
+        print(user.user_id)
+        print(user.name)
+    return render(request, 'test.html', {'posts':users})
+
 
 
 

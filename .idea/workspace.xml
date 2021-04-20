@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="" />
-=======
-<<<<<<< HEAD
-    <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/audio_book.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/audio_book.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="77aca64c-e41e-45af-ada1-63a00888e03d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookApp/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookApp/templates/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/bookApp/templates/page2.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/templates/page2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio_book/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/audio_book/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookApp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-=======
->>>>>>> develop
     </list>
-=======
-    <list default="true" id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="" />
->>>>>>> develop
->>>>>>> 0c6feae5dfe24675066d8cba2f412a325b1dafca
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -44,14 +35,16 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.views">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="audio_book" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -73,8 +66,37 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="audio_book" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bookApp" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bookApp/views.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.views" />
+      </list>
+    </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c231df1c-fd20-4714-8977-55016e20053b" name="Default Changelist" comment="" />
@@ -96,5 +118,27 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="724" height="216" key="GridCell.Tab.0.bottom" timestamp="1618812774954">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="724" height="216" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1618812774954" />
+    <state width="724" height="216" key="GridCell.Tab.0.center" timestamp="1618812774953">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="724" height="216" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1618812774953" />
+    <state width="724" height="216" key="GridCell.Tab.0.left" timestamp="1618812774953">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="724" height="216" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1618812774953" />
+    <state width="724" height="216" key="GridCell.Tab.0.right" timestamp="1618812774954">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="724" height="216" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1618812774954" />
+    <state x="277" y="62" key="SettingsEditor" timestamp="1618809429636">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="277" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1618809429636" />
   </component>
 </project>
