@@ -158,6 +158,8 @@ Thumbs.db
 # profiling data
 .prof
 
+# workspace
+.idea/workspace.xml
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
