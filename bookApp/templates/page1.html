@@ -12,25 +12,30 @@
       <div class="ment">동화책을 올려주세요 !!!</div>
 
       <!-- 데이터 전송 -->
-      <form class="file-upload"  method="post" enctype="multipart/form-data">
+<!--      <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        {{form}}-->
+
+
+
+
+<!--        <div class="drop-zone">-->
+<!--          <div class="btn btn-default btn-file">-->
+<!--            <div class="icon"><i class="fas fa-download"></i></div>-->
+
+<!--            <input type="file" id="file" name="file" />-->
+<!--          </div>-->
+<!--          <div class="info">Click or Drag</div>-->
+<!--        </div>-->
+<!--        <div class="submit"><input type="submit" value="음성변환" /></div>-->
+<!--      </form>-->
+      <!-- 데이터 전송 -->
+      <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-<!--        <table>-->
-<!--          {{ form.as_p }}-->
-<!--        </table>-->
-
-        <div class="drop-zone">
-          <div class="btn btn-default btn-file">
-            <div class="icon"><i class="fas fa-download"></i></div>
-
-            <input type="file" id="file" name="file"  />
-          </div>
-          <div class="info">Click or Drag</div>
-        </div>
+        <input type="file" id="files" name="text" />
         <div class="submit"><input type="submit" value="음성변환" /></div>
       </form>
-      <!-- 데이터 전송 -->
-<!--      <a id="id_uploaded_file" href="{ uploadFileModel.file.url }" download>{ uploadFileModel.file.name }</a>-->
-<!--    </div>-->
+    </div>
 
 <!-- *************************** book : 화면 END ***************************  -->
   {% include 'footer.html' %}
