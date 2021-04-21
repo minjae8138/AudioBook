@@ -9,13 +9,7 @@
 
         var list = ["dragenter", "dragleave", "dragover", "drop"]
 
-        for (var i = 0; i < list.length; i++) {
-            if (className === list[i]) {
-                dropZone.classList.add("drop-zone-" + list[i])
-            } else {
-                dropZone.classList.remove("drop-zone-" + list[i])
-            }
-        }
+
     }
     
     var showFiles = function(files) {
