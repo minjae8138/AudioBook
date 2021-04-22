@@ -135,8 +135,10 @@ def signup(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
+            print('success')
             return redirect('index')
         else:
+            print('fail')
             return render(request, "signup.html", {'form':form})
 
     else:

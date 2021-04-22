@@ -17,7 +17,8 @@
     <div class="row">
         <h4>Signup</h4>
     </div>
-    <form method="post" action="{% url 'signup' %}">
+    <form method="post" autocomplete="off">
+<!--    placeholder 쓸까요?-->
         {% csrf_token %}
         <table>
             {{form.as_table}}
