@@ -27,10 +27,10 @@ class ContentTb(models.Model):
 
 
 class UserTb(models.Model):
-    user_id = models.CharField(db_column='USER_ID', primary_key=True, max_length=30)  # Field name made lowercase.
-    pw = models.CharField(db_column='PW', max_length=30)  # Field name made lowercase.
-    name = models.CharField(db_column='NAME', max_length=30)  # Field name made lowercase.
-    e_mail = models.CharField(db_column='E_MAIL', max_length=50)  # Field name made lowercase.
+    user_id = models.CharField(db_column='USER_ID', primary_key=True, max_length=30, verbose_name='Id')  # Field name made lowercase.
+    pw = models.CharField(db_column='PW', max_length=30, verbose_name='Password')  # Field name made lowercase.
+    name = models.CharField(db_column='NAME', max_length=30, verbose_name='Name')  # Field name made lowercase.
+    e_mail = models.CharField(db_column='E_MAIL', max_length=50, verbose_name='E-mail')  # Field name made lowercase.
 
     class Meta:
         managed = False
