@@ -68,6 +68,7 @@ def pred(test_file):
             # print(y_pred)
             # print('-------------------------------')
             test_file[i] = "".join(test_file[i]) + str(y_pred)
+            # print(test_file[i])
             # print("------", test_file[i][-2])
 
     return test_file
@@ -91,14 +92,34 @@ def upload(request) :
     fin = fin_list[:]
 
     # 모델 적용 후 DB에 저장
-    pred(fin)
-    print(fin)
+    # pred(fin)
+
+
+    # me = UserTb.objects.get(user_id='test')
+
+    # book = BookTb.objects.get(book_id = -1)
+
+
+    # cnt = 0
+    # for i in range(len(fin)) :
+    #     print("fin[i]------------>",fin[i], fin[i][-2])
+    #     if fin[i][-2].isdigit() :
+    #         cnt += 1
+    #         cont = ContentTb(
+    #             content_id = cnt,
+    #             sentence_id = cnt,
+    #             text = fin[i][:-3],
+    #             feelring = fin[i][-2],
+    #             book = book
+    #
+    #         )
+    #         cont.save()
+    #         print("cont------------>",cont)
 
 
 
 
     return redirect('index')
-
 
 
 # 음성서비스 페이지
