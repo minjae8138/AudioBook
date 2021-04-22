@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render , redirect
 from .models import *
+from .forms import UserForm
 
 # 파이썬
 import re
@@ -103,3 +104,21 @@ def upload(request) :
 # 음성서비스 페이지
 def read(request):
     return render(request, 'page2.html')
+
+
+
+# 회원가입
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('index')
+        else:
+            return render(request, "signup.html", {'form':form})
+
+    else:
+        form = UserForm(None)
+        return render(request, 'signup.html', {'form':form})
+

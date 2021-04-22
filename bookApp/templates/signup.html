@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static%}
+{% include 'header.html' %}
+<!-- *************************** book : 화면 START *************************  -->
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Signup Page</title>
+</head>
+
+
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <h4>Signup</h4>
+    </div>
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <br>
+        <div>
+            <input type="submit" class="btn" value="제출하기"/>
+        </div>
+
+    </form>
+</div>
+
+
+
+</body>
+
+
+</html>
+
+
+<!-- *************************** book : 화면 END ***************************  -->
+{% include 'footer.html' %}
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script  src="{% static 'js/drag.js

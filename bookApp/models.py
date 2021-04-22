@@ -27,6 +27,9 @@ class ContentTb(models.Model):
 
 
 class UserTb(models.Model):
+    # user_id / unique=True
+    # e_mail / EmailField
+    # verbose_name 설정?
     user_id = models.CharField(db_column='USER_ID', primary_key=True, max_length=30)  # Field name made lowercase.
     pw = models.CharField(db_column='PW', max_length=30)  # Field name made lowercase.
     name = models.CharField(db_column='NAME', max_length=30)  # Field name made lowercase.
