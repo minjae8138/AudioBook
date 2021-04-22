@@ -15,8 +15,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 
 
-
-
+from mimetypes import guess_type
 
 
 
@@ -63,22 +62,35 @@ def pred(test_file):
             # print(encoded)
             pad_new = pad_sequences(encoded, maxlen=30)
             y_pred = model.predict_classes(pad_new, verbose=1)
-            # print("-------------------------------")
-            # print(y_pred)
-            # print('-------------------------------')
-            test_file[i] = "".join(test_file[i]) + str(y_pred)
-            # print(test_file[i])
-            # print("------", test_file[i][-2])
+            # print("before",test_file[i])
+            # test_file[i] =  del_useless(test_file[i], ['', ' ', '  ' '.', "“", "”","\r","r"])
+            test_file[i] = [test_file[i]]
+            test_file[i].append(y_pred[0])
+            # print("----------------->",test_file[i])
+            # test_file[i] = "".join(test_file[i]) + str(y_pred)
 
     return test_file
 
 # 파일 업로드
 def upload(request) :
     file = request.FILES['text']
-    # print('request upload - ',file)
 
-    # 디코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
-    result_file=file.read().decode('utf-8')
+    # 파일이 업로드 되었으면 bookTb에 정보 저장
+    # userTb에서 user_id 가져오기
+    me = UserTb.objects.get(user_id='test')
+    if file :
+        book = BookTb(
+            user =  me
+        )
+        book.save()
+
+    # 인코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
+    try :
+        result_file = file.read().decode('utf-8')
+        print(111)
+    except:
+        result_file = file.read().decode('euc-kr')
+        print(222)
 
     # 괄호 처리
     regex_gualho = '\([^)]*\)'
@@ -89,33 +101,54 @@ def upload(request) :
     mid = re.split('[".]', r_cont)
     fin_list = del_useless(mid, ['', ' ', '  ' '.', "“", "”"])
     fin = fin_list[:]
-
+    # print(fin)
     # 모델 적용 후 DB에 저장
-    # pred(fin)
-
-
-    # me = UserTb.objects.get(user_id='test')
-
-    # book = BookTb.objects.get(book_id = -1)
-
-
-    # cnt = 0
+    pred(fin)
     # for i in range(len(fin)) :
-    #     print("fin[i]------------>",fin[i], fin[i][-2])
-    #     if fin[i][-2].isdigit() :
-    #         cnt += 1
-    #         cont = ContentTb(
-    #             content_id = cnt,
-    #             sentence_id = cnt,
-    #             text = fin[i][:-3],
-    #             feelring = fin[i][-2],
-    #             book = book
-    #
-    #         )
-    #         cont.save()
-    #         print("cont------------>",cont)
+    #     print(i,fin[i])
 
 
+    # book_id 채번
+    # ---------------------------
+
+
+    # 책번호 : B + '00001'
+    # new_bookid= 'B' + '00001'
+
+    # od = 1
+
+    # 책번호
+    # if od:
+    #     a = od[0]['max_bookid']
+    #     new_bookid = 'B' +  str(int(a[2:]) + 1).zfill(5)
+
+
+    ##############
+    ## contenttb에 저장 테스트 버전전
+    # cont = ContentTb(
+    #     # content_id= id,
+    #     sentence_id = 500,
+    #     text = "테스트",
+    #     feelring = 3,
+    #     book = book
+    # )
+    # cont.save()
+
+    # content_tb에 데이터 저장
+    cnt = 0
+    for i in range(len(fin)) :
+        print("fin[i]------------>",fin[i], fin[i][1])
+        # if str(fin[i][1]).isdigit() :
+        cnt += 1
+        cont = ContentTb(
+            sentence_id = cnt,
+            text = fin[i][0],
+            feelring = fin[i][1],
+            book = book
+
+        )
+        cont.save()
+        print("cont------------>",cont)
 
 
     return redirect('index')
