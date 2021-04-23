@@ -1,10 +1,11 @@
 audio {
-  width: 500px;
+  width: 700px;
 }
 
 .audios {
   position: absolute;
-  left: 23%;
+  left: 19%;
+  top: 3%;
 }
 
 .container {
@@ -15,7 +16,7 @@ audio {
 .left {
   position: relative;
   margin-top: 50px;
-  height: 550px;
+  height: 700px;
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
@@ -67,7 +68,7 @@ audio {
 }
 
 .book-list {
-  height: 470px;
+  height: 550px;
   width: 300px;
   margin: 3px;
   padding: 5px;
@@ -77,8 +78,8 @@ audio {
 
 .box {
   background-color: #2b2a49;
-  width: 700px;
-  height: 350px;
+  width: 900px;
+  height: 500px;
   font-size: 20px;
   margin-left: 110px;
   list-style: none;
@@ -107,7 +108,8 @@ audio {
 .container-list {
   position: relative;
   padding: 10px;
-  width: 90%;
+  width: 100%;
+  height: 700px;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 30px;

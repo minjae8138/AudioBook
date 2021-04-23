@@ -10,7 +10,11 @@ import re
 import pandas as pd
 import numpy as np
 
+
+# 모델
+
 # # 모델
+
 # from konlpy.tag import Komoran
 # from tensorflow.keras.preprocessing.text import Tokenizer
 # from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -30,11 +34,16 @@ def test(request):
     return render(request, 'test.html', {'posts':users})
 
 
+
+# 모델로드 및 세팅
+
 # # 모델로드 및 세팅
+
 # model = load_model('nlp_model.h5')
 # tokenizer = Tokenizer()
 # stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
 # kor = Komoran()
+
 
 # 기본페이지, 세션유지
 
@@ -51,6 +60,7 @@ def test(request):
 #         # return redirect('login')
 #         print('login needed - ', request.session['user_id'])
 #         return render(request, 'page1.html')
+
 
 
 def index(request):
@@ -211,6 +221,19 @@ def upload(request) :
 # 음성서비스 페이지, 세션 유지
 def read(request):
 
+<<<<<<< HEAD
+=======
+    if request.session.get('user_id') and request.session.get('name'):
+        context = {'user_id' : request.session['user_id'],
+                   'name' : request.session['name']}
+        print('logged in - ', context['user_id'])
+        return render(request, 'page2.html', context)
+    else:
+        print('login needed - ', request.session.get('user_id'))
+        return render(request, 'login.html')
+    # return render(request, 'page2.html')
+
+>>>>>>> 8c1b455489dbce5eaf99c126bc413b5c1f2969c5
     contents = ContentTb.objects.all()
     context = {'contents': contents}
     return render(request, 'page2.html', context)
