@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Orelega+One&display=swap");
+
 
 /* @media screen and (max-width: 768px) {
   body {
@@ -13,7 +13,6 @@
 body {
   color: aliceblue;
   font-size: 25px;
-  font-family: "Orelega One", cursive;
 }
 
 #bg {
