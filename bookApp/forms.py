@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.hashers import check_password
 from django.forms import Form
 
 # from .models import UploadFileModel
@@ -26,6 +27,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from .models import *
 
+# 회원가입 폼
 class UserForm(forms.ModelForm):
 
     class Meta:
@@ -37,3 +39,13 @@ class UserForm(forms.ModelForm):
         }
 
 
+
+# 로그인 폼
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = UserTb
+        fields = ['user_id', 'pw']
+        widgets = {
+            'pw' : forms.PasswordInput(),
+        }

@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Poboca's Story</title>
+  <title>Pobica's Story</title>
  <!--    reset.css   -->
     <link
       rel="stylesheet"
@@ -20,6 +20,7 @@
     />
   <!-- Custom styles for this template -->
   <link href="{% static 'css/basic.css'%}" rel="stylesheet">
+    <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
 
 
 </head>
@@ -47,9 +48,43 @@
       </div>
       <div class="info__box">
         <!-- <div class="nickname">nickname</div> -->
-        <div class="login">logout</div>
+          {% if users.is_active %}
+          <div class="login-active">
+              <a href="#"><label class="username">users.name</label></a>
+              <a href="{% url 'logout' %}"><label class="logout">Logout</label></a>
+              <a href="#"><label class="mypage">My Page</label></a>
+          </div>
+          {% else %}
+          <div class="logged-out">
+              <a href="{% url 'login' %}"><label class="login">Login</label></a>
+          </div>
+          {% endif %}
+
       </div>
-    </header>
+
+     <script>
+<!--          $(document).ready(function() {-->
+<!--              var username = '<%=session.getAttribute('user_id')%>';-->
+<!--console.log(username)-->
+<!--              if(username != 'null') {-->
+<!--                $('login-active').show();-->
+<!--                $('logged-out').hide();-->
+<!--                $('username').val(username);-->
+<!--              }-->
+<!--              else {-->
+<!--                $('login-active').hide();-->
+<!--                $('logged-out').show();-->
+<!--              };-->
+<!--          });-->
+
+
+      </script>
+
+
+
+ </header>
+
+
 
 <!-- *************************** book: 공통 (HEADER) END  ******************  -->
 
