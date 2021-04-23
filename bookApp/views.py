@@ -10,10 +10,10 @@ import pandas as pd
 import numpy as np
 
 # 모델
-# from konlpy.tag import Komoran
-# from tensorflow.keras.preprocessing.text import Tokenizer
-# from tensorflow.keras.preprocessing.sequence import pad_sequences
-# from keras.models import load_model
+from konlpy.tag import Komoran
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from keras.models import load_model
 
 
 # from mimetypes import guess_type
@@ -30,10 +30,10 @@ def test(request):
 
 
 # 모델로드 및 세팅
-# model = load_model('nlp_model.h5')
-# tokenizer = Tokenizer()
-# stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
-# kor = Komoran()
+model = load_model('nlp_model.h5')
+tokenizer = Tokenizer()
+stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
+kor = Komoran()
 
 # 기본페이지
 def index(request):
