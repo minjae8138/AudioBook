@@ -210,21 +210,11 @@ def upload(request) :
 
 # 음성서비스 페이지, 세션 유지
 def read(request):
-<<<<<<< HEAD
-    if request.session.get('user_id') and request.session.get('name'):
-        context = {'user_id' : request.session['user_id'],
-                   'name' : request.session['name']}
-        print('logged in - ', context['user_id'])
-        return render(request, 'page2.html', context)
-    else:
-        print('login needed - ', request.session.get('user_id'))
-        return render(request, 'login.html')
-    # return render(request, 'page2.html')
-=======
+
     contents = ContentTb.objects.all()
     context = {'contents': contents}
     return render(request, 'page2.html', context)
->>>>>>> 87a38ffcdbd8355546491ff28a7554a555ca10fe
+
 
 
 
