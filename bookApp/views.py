@@ -10,11 +10,11 @@ import re
 import pandas as pd
 import numpy as np
 
-<<<<<<< HEAD
+
 # 모델
-=======
+
 # # 모델
->>>>>>> b9441c43fdc54a546b40a8f8c29acd15562a1d31
+
 # from konlpy.tag import Komoran
 # from tensorflow.keras.preprocessing.text import Tokenizer
 # from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -34,17 +34,16 @@ def test(request):
     return render(request, 'test.html', {'posts':users})
 
 
-<<<<<<< HEAD
+
 # 모델로드 및 세팅
-=======
+
 # # 모델로드 및 세팅
->>>>>>> b9441c43fdc54a546b40a8f8c29acd15562a1d31
+
 # model = load_model('nlp_model.h5')
 # tokenizer = Tokenizer()
 # stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
 # kor = Komoran()
-<<<<<<< HEAD
-=======
+
 
 # 기본페이지, 세션유지
 
@@ -62,7 +61,7 @@ def test(request):
 #         print('login needed - ', request.session['user_id'])
 #         return render(request, 'page1.html')
 
->>>>>>> b9441c43fdc54a546b40a8f8c29acd15562a1d31
+
 
 def index(request):
     if request.session.get('user_id') and request.session.get('name'):
