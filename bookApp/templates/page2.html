@@ -5,31 +5,8 @@
 <!-- *************************** book : 화면 START *************************  -->
 
 <style>
-    .container {
-        display: grid;
-        grid-template-columns: 0.3fr 3fr 1fr 0.3fr;
-        grid-template-rows: 1.5fr 5fr 0.5fr;
-        gap: 0.5px 0.5px;
-        grid-template-areas:
-            ". . . ."
-            ". left right ."
-            ". . . .";
-    }
-    .left { grid-area: left; }
-    .right { grid-area: right; }
 
-    .top-1 {
-        margin: 20px;
-    }
-    img {
-        max-width: 100%;
-<!--        object-fit: fill;-->
-        height: 250px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        /* width: 50%; */
-    }
+
 
     audio {
         max-width: 100%;
@@ -44,10 +21,11 @@
         position: relative;
     }
     .bottom-1 {
-        display: flex;
+
         align-items: center;
         margin: 0;
-        position: absolute;
+        width : 100px;
+        height: 100px;
         top: 50%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
@@ -70,25 +48,9 @@
     .hidden {
         display: none;
     }
-    div.box {
-        height: 50px;
-        border: 1px solid #bcbcbc;
-        background-color: #dadada;
-    }
 
-    .container-list {
-        padding: 10px;
-        height: 324px;
-        border: thick double;
-        border-color: black;
-    }
-    .top-list {
-        margin-left: 10px;
-        margin: 3px;
-        padding: 3px 15px;
-        background-color: cornsilk;
-        color: black;
-    }
+
+
     .bottom-list {
         margin: 3px;
         padding: 5px;
@@ -114,25 +76,36 @@
   <div class="left">
     <div class="top">
       <div class="container-male">
-        <div class="top-1" name="image">
-          <img src="{% static 'src/wolf.jpg'%}">
-        </div>
         <div class="top-2" name="audio bar">
           <audio controls>
             <source src="{% static 'src/sample_audio_1.mp3'%}">
           </audio>
         </div>
       </div>
+
       <div class="container-female hidden">
-        <div class="top-1" name="image">
-          <img src="{% static 'src/red.jpg'%}">
-        </div>
+
         <div class="top-2" name="audio bar">
           <audio controls>
             <source src="{% static 'src/sample_audio_2.mp3'%}">
           </audio>
         </div>
       </div>
+    </div>
+
+    <div>
+
+
+
+
+{% if contents %}
+{%  for content in  contents   %}
+
+    {{content.content_id}}
+{%    endfor    %}
+{% else %}
+    <p>  데이터가 존재하지 않습니다. </p>
+{% endif %}
     </div>
     <div class="bottom">
       <div class="container-btn">
@@ -198,4 +171,3 @@
 <!-- *************************** book : 화면 END ***************************  -->
   {% include 'footer.html' %}
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  <script  src="{% static 'js/drag.js'%}"></script>

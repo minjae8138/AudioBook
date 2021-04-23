@@ -10,13 +10,13 @@ import pandas as pd
 import numpy as np
 
 # 모델
-from konlpy.tag import Komoran
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from keras.models import load_model
+# from konlpy.tag import Komoran
+# from tensorflow.keras.preprocessing.text import Tokenizer
+# from tensorflow.keras.preprocessing.sequence import pad_sequences
+# from keras.models import load_model
 
 
-from mimetypes import guess_type
+# from mimetypes import guess_type
 
 
 
@@ -30,10 +30,10 @@ def test(request):
 
 
 # 모델로드 및 세팅
-model = load_model('nlp_model.h5')
-tokenizer = Tokenizer()
-stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
-kor = Komoran()
+# model = load_model('nlp_model.h5')
+# tokenizer = Tokenizer()
+# stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
+# kor = Komoran()
 
 # 기본페이지
 def index(request):
@@ -78,12 +78,12 @@ def upload(request) :
 
     # 파일이 업로드 되었으면 bookTb에 정보 저장
     # userTb에서 user_id 가져오기
-    me = UserTb.objects.get(user_id='test')
-    if file :
-        book = BookTb(
-            user =  me
-        )
-        book.save()
+    # me = UserTb.objects.get(user_id='test')
+    # if file :
+    #     book = BookTb(
+    #         user =  me
+    #     )
+    #     book.save()
 
     # 인코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
     try :
@@ -136,28 +136,30 @@ def upload(request) :
     # cont.save()
 
     # content_tb에 데이터 저장
-    cnt = 0
-    for i in range(len(fin)) :
-        print("fin[i]------------>",fin[i], fin[i][1])
-        # if str(fin[i][1]).isdigit() :
-        cnt += 1
-        cont = ContentTb(
-            sentence_id = cnt,
-            text = fin[i][0],
-            feelring = fin[i][1],
-            book = book
+    # cnt = 0
+    # for i in range(len(fin)) :
+    #     print("fin[i]------------>",fin[i], fin[i][1])
+    #     # if str(fin[i][1]).isdigit() :
+    #     cnt += 1
+    #     cont = ContentTb(
+    #         sentence_id = cnt,
+    #         text = fin[i][0],
+    #         feelring = fin[i][1],
+    #         book = book
+    #
+    #     )
+    #     cont.save()
+    #     print("cont------------>",cont)
 
-        )
-        cont.save()
-        print("cont------------>",cont)
 
-
-    return redirect('index')
+    return redirect('read')
 
 
 # 음성서비스 페이지
 def read(request):
-    return render(request, 'page2.html')
+    contents = ContentTb.objects.all()
+    context = {'contents': contents}
+    return render(request, 'page2.html', context)
 
 
 
