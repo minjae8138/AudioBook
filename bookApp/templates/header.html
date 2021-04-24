@@ -48,11 +48,11 @@
       </div>
       <div class="info__box">
         <!-- <div class="nickname">nickname</div> -->
-          {% if users.is_active %}
+          {% if users %}
           <div class="login-active">
-              <a href="#"><label class="username">users.name</label></a>
+              <label class="username">{{users}}</label>
               <a href="{% url 'logout' %}"><label class="logout">Logout</label></a>
-              <a href="#"><label class="mypage">My Page</label></a>
+<!--              <a href="#"><label class="mypage">My Page</label></a>-->
           </div>
           {% else %}
           <div class="logged-out">
@@ -63,19 +63,16 @@
       </div>
 
      <script>
-<!--          $(document).ready(function() {-->
-<!--              var username = '<%=session.getAttribute('user_id')%>';-->
-<!--console.log(username)-->
-<!--              if(username != 'null') {-->
-<!--                $('login-active').show();-->
-<!--                $('logged-out').hide();-->
-<!--                $('username').val(username);-->
-<!--              }-->
-<!--              else {-->
-<!--                $('login-active').hide();-->
-<!--                $('logged-out').show();-->
-<!--              };-->
-<!--          });-->
+          $(document).ready(function() {
+              if({{users}}) {
+                $('login-active').show();
+                $('logged-out').hide();
+              }
+              else {
+                $('login-active').hide();
+                $('logged-out').show();
+              };
+          });
 
 
       </script>

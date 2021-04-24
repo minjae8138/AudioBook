@@ -66,8 +66,8 @@ def test(request):
 def index(request):
     if request.session.get('user_id') and request.session.get('name'):
         users = UserTb.objects.all()
-        context = {'users':users}
-        print('logged in - ')
+        context = {'users':request.session['user_id']}
+        print('logged in - ', request.session['user_id'])
         return render(request, 'page1.html', context)
     else:
         # form = LoginForm()
@@ -134,7 +134,7 @@ def pred(test_file):
 
 # 파일 업로드
 # 로그인 데코레이터 추가
-@login_required
+
 def upload(request) :
     file = request.FILES['text']
 
@@ -221,19 +221,9 @@ def upload(request) :
 # 음성서비스 페이지, 세션 유지
 def read(request):
 
-<<<<<<< HEAD
-=======
-    if request.session.get('user_id') and request.session.get('name'):
-        context = {'user_id' : request.session['user_id'],
-                   'name' : request.session['name']}
-        print('logged in - ', context['user_id'])
-        return render(request, 'page2.html', context)
-    else:
-        print('login needed - ', request.session.get('user_id'))
-        return render(request, 'login.html')
+
     # return render(request, 'page2.html')
 
->>>>>>> 8c1b455489dbce5eaf99c126bc413b5c1f2969c5
     contents = ContentTb.objects.all()
     context = {'contents': contents}
     return render(request, 'page2.html', context)
