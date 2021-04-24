@@ -59,7 +59,11 @@ def index(request):
         print('logged in - ', request.session['user_id'])
         return render(request, 'page1.html', context)
     else:
+
+        # form = LoginForm()
+        # return redirect('login')
         print('login needed - ', request.session['user_id'])
+
         return render(request, 'page1.html')
 
 
@@ -137,14 +141,20 @@ def get_book_evaluation_predict(text_list):
 def upload(request) :
     file = request.FILES['text']
 
-    # 파일이 업로드 되었으면 bookTb에 정보 저장
-    # userTb에서 user_id 가져오기
-    # me = UserTb.objects.get(user_id='test')
-    # if file :
-    #     book = BookTb(
-    #         user =  me
-    #     )
-    #     book.save()
+    # session을 통해 user_id 가져오기
+    print('----------------------------> ', request.session['user_id'])
+    user_id = UserTb.objects.get(user_id = request.session['user_id'])
+
+    # book_name 가져오기
+    book_name = request.POST['bookname']
+    print("book_name",book_name)
+
+    # bookTb에 파일 정보 저장
+    book = BookTb(
+        user =  user_id,
+        book_name = book_name
+    )
+    book.save()
 
     # 인코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
     try :
@@ -162,57 +172,24 @@ def upload(request) :
     r_cont = re.sub("\n", " ", r_cont)
     mid = re.split('[".]', r_cont)
     fin_list = del_useless(mid, ['', ' ', '  ' '.', "“", "”"])
-
     fin = fin_list[:]
-    # print(fin)
-    # 모델 적용 후 DB에 저장
-    get_book_evaluation_predict(fin)
-    # for i in range(len(fin)) :
-    #     print(i,fin[i])
+
+    fin_text_list = get_book_evaluation_predict(fin)
 
 
-    # book_id 채번
-    # ---------------------------
-
-
-    # 책번호 : B + '00001'
-    # new_bookid= 'B' + '00001'
-
-    # od = 1
-
-    # 책번호
-    # if od:
-    #     a = od[0]['max_bookid']
-    #     new_bookid = 'B' +  str(int(a[2:]) + 1).zfill(5)
-
-
-    ##############
-    ## contenttb에 저장 테스트 버전전
-    # cont = ContentTb(
-    #     # content_id= id,
-    #     sentence_id = 500,
-    #     text = "테스트",
-    #     feelring = 3,
-    #     book = book
-    # )
-    # cont.save()
-
-    # content_tb에 데이터 저장
-    # cnt = 0
-    # for i in range(len(fin)) :
-    #     print("fin[i]------------>",fin[i], fin[i][1])
-    #     # if str(fin[i][1]).isdigit() :
-    #     cnt += 1
-    #     cont = ContentTb(
-    #         sentence_id = cnt,
-    #         text = fin[i][0],
-    #         feelring = fin[i][1],
-    #         book = book
-    #
-    #     )
-    #     cont.save()
-    #     print("cont------------>",cont)
-
+    # contentTb에 데이터 저장
+    cnt = 0
+    for i in range(len(fin)) :
+        # print("fin[i]------------>",fin[i], fin[i][1])
+        cnt += 1
+        cont = ContentTb(
+            sentence_id = cnt,
+            text = fin_text_list[i][0],
+            feeling = fin_text_list[i][1],
+            book = book
+        )
+        cont.save()
+        print("cont------------>",cont)
 
     return redirect('read')
 
@@ -224,12 +201,19 @@ def upload(request) :
 
 # 음성서비스 페이지
 def read(request):
+
+
+
     if request.session.get('user_id') and request.session.get('name'):
         username = request.session['name']
         users = UserTb.objects.get(user_id=request.session['user_id'])
         books = BookTb.objects.all().filter(user=request.session['user_id'])
-        # book_id = books.id
-        contents = ContentTb.objects.all()
+
+        # book_info - user_id의 여러 책중 특정 책을 가져오기 위해 리스트 형식에서 추출하기 위해 필요
+        book_info = BookTb.objects.values_list().filter(user=users)
+        n_len = len(book_info)
+        contents = ContentTb.objects.values().filter(book = book_info[n_len-1][0])
+
         context = {
             'username': username,
             'users': users,
@@ -239,6 +223,7 @@ def read(request):
         }
         print('logged in - ', request.session['user_id'])
         return render(request, 'page2.html', context)
+
 
 
 # 책이름 수정
