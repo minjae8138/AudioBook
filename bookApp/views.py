@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render , redirect
 from .models import *
 from .forms import UserForm
+from .apps import *
 
 # 파이썬
 import re
@@ -111,30 +112,62 @@ def del_useless(text_list, del_list):
     return text_list
 
 # 업로드된 텍스트파일을 모델에 적용하는 로직
-def pred(test_file):
-    for i in range(len(test_file)):
-        if len(test_file[i].lstrip()) == 0:
-            pass
-        else:
-            new_sentence = kor.morphs(test_file[i])
-            new_sentence = [word for word in new_sentence if not word in stopwords]
-            tokenizer.fit_on_texts(new_sentence)
-            encoded = tokenizer.texts_to_sequences([new_sentence])
-            # print(encoded)
-            pad_new = pad_sequences(encoded, maxlen=30)
-            y_pred = model.predict_classes(pad_new, verbose=1)
-            # print("before",test_file[i])
-            # test_file[i] =  del_useless(test_file[i], ['', ' ', '  ' '.', "“", "”","\r","r"])
-            test_file[i] = [test_file[i]]
-            test_file[i].append(y_pred[0])
-            # print("----------------->",test_file[i])
-            # test_file[i] = "".join(test_file[i]) + str(y_pred)
+# def pred(test_file):
+#     for i in range(len(test_file)):
+#         if len(test_file[i].lstrip()) == 0:
+#             pass
+#         else:
+#             new_sentence = kor.morphs(test_file[i])
+#             new_sentence = [word for word in new_sentence if not word in stopwords]
+#             tokenizer.fit_on_texts(new_sentence)
+#             encoded = tokenizer.texts_to_sequences([new_sentence])
+#             # print(encoded)
+#             pad_new = pad_sequences(encoded, maxlen=30)
+#             y_pred = model.predict_classes(pad_new, verbose=1)
+#             # print("before",test_file[i])
+#             # test_file[i] =  del_useless(test_file[i], ['', ' ', '  ' '.', "“", "”","\r","r"])
+#             test_file[i] = [test_file[i]]
+#             test_file[i].append(y_pred[0])
+#             # print("----------------->",test_file[i])
+#             # test_file[i] = "".join(test_file[i]) + str(y_pred)
+#
+#     return test_file
 
-    return test_file
+def get_book_evaluation_predict(text_list):
+    print("start_predict")
+    text_feeling_list = []
+    tokenizer = BertConfig.tokenizer
+    SEQ_LEN = 64
+    loaded_model = BertConfig.loaded_model
+    for data in text_list:
+        tokens, masks, segments = [], [], []
+        token = tokenizer.encode(data, max_length=SEQ_LEN, truncation=True, padding='max_length')
+
+        num_zeros = token.count(0)
+        mask = [1] * (SEQ_LEN - num_zeros) + [0] * num_zeros
+        segment = [0] * SEQ_LEN
+
+        tokens.append(token)
+        segments.append(segment)
+        masks.append(mask)
+
+        tokens = np.array(tokens)
+        masks = np.array(masks)
+        segments = np.array(segments)
+        data_x = [tokens, masks, segments]
+        predict = loaded_model.predict(data_x)
+        feeling = np.argmax(predict, axis=1)
+        text_feeling_list.append([data, feeling[0]])
+
+    print(text_feeling_list)
+    return text_feeling_list
+
+
+
 
 # 파일 업로드
 # 로그인 데코레이터 추가
-@login_required
+# @login_required
 def upload(request) :
     file = request.FILES['text']
 
@@ -160,14 +193,14 @@ def upload(request) :
     r_cont = re.sub(regex_gualho, '', result_file)
 
     # 개행 제거
-    r_cont = re.sub("\n", "", r_cont)
+    r_cont = re.sub("\n", " ", r_cont)
     mid = re.split('[".]', r_cont)
     fin_list = del_useless(mid, ['', ' ', '  ' '.', "“", "”"])
 
     fin = fin_list[:]
     # print(fin)
     # 모델 적용 후 DB에 저장
-    pred(fin)
+    get_book_evaluation_predict(fin)
     # for i in range(len(fin)) :
     #     print(i,fin[i])
 
@@ -221,15 +254,15 @@ def upload(request) :
 # 음성서비스 페이지, 세션 유지
 def read(request):
 
-    if request.session.get('user_id') and request.session.get('name'):
-        context = {'user_id' : request.session['user_id'],
-                   'name' : request.session['name']}
-        print('logged in - ', context['user_id'])
-        return render(request, 'page2.html', context)
-    else:
-        print('login needed - ', request.session.get('user_id'))
-        return render(request, 'login.html')
-    # return render(request, 'page2.html')
+    # if request.session.get('user_id') and request.session.get('name'):
+    #     context = {'user_id' : request.session['user_id'],
+    #                'name' : request.session['name']}
+    #     print('logged in - ', context['user_id'])
+    #     return render(request, 'page2.html', context)
+    # else:
+    #     print('login needed - ', request.session.get('user_id'))
+    #     return render(request, 'login.html')
+    # # return render(request, 'page2.html')
 
     contents = ContentTb.objects.all()
     context = {'contents': contents}
