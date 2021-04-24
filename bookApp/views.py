@@ -47,21 +47,25 @@ def test(request):
 
 
 
-##########
+####################
 ## Page 1
 
 # 기본페이지, 세션유지
 
 def index(request):
     if request.session.get('user_id') and request.session.get('name'):
-        users = UserTb.objects.all()
-        context = {'users':request.session['user_id']}
+        # users = UserTb.objects.all()
+        context = {'username':request.session['name']}
         print('logged in - ', request.session['user_id'])
         return render(request, 'page1.html', context)
     else:
+<<<<<<< HEAD
         # form = LoginForm()
         # return redirect('login')
         # print('login needed - ', request.session['user_id'])
+=======
+        print('login needed - ', request.session['user_id'])
+>>>>>>> 8192856f33e1afadf33f505e7562d64b05fcc653
         return render(request, 'page1.html')
 
 
@@ -193,11 +197,13 @@ def upload(request) :
 
 
 
-##########
+####################
 ## Page 2
+
 
 # 음성서비스 페이지
 def read(request):
+<<<<<<< HEAD
     user_id = UserTb.objects.get(user_id=request.session['user_id'])
     print(user_id)
     # BookTb로부터 로그인된 user_id에 해당하는 Book정보를 가져온다
@@ -211,6 +217,21 @@ def read(request):
     context = {'contents': contents,
                'books': books}
     return render(request, 'page2.html', context)
+=======
+    if request.session.get('user_id') and request.session.get('name'):
+        username = request.session['name']
+        users = UserTb.objects.get(user_id=request.session['user_id'])
+        books = BookTb.objects.all().filter(user=request.session['user_id'])
+        contents = ContentTb.objects.all()
+        context = {
+            'username': username,
+            'users': users,
+            'contents': contents,
+            'books': books,
+        }
+        print('logged in - ', request.session['user_id'])
+        return render(request, 'page2.html', context)
+>>>>>>> 8192856f33e1afadf33f505e7562d64b05fcc653
 
 
 # 책이름 수정
@@ -233,7 +254,7 @@ def deleteBook(request, book_id):
 
 
 
-##########
+####################
 ## Users Related Views
 
 
@@ -271,7 +292,7 @@ def login(request):
         pw = request.POST['pw']
         # 앞이 db 컬럼, 뒤가 받아오는 정보
         user = UserTb.objects.get(user_id = user_id, pw = pw)
-        print('user result - ', user)
+        print('user - ', user)
 
         context={}
         if user is not None:
