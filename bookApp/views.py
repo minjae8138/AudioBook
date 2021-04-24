@@ -47,20 +47,18 @@ def test(request):
 
 
 
-##########
+####################
 ## Page 1
 
 # 기본페이지, 세션유지
 
 def index(request):
     if request.session.get('user_id') and request.session.get('name'):
-        users = UserTb.objects.all()
-        context = {'users':request.session['user_id']}
+        # users = UserTb.objects.all()
+        context = {'username':request.session['name']}
         print('logged in - ', request.session['user_id'])
         return render(request, 'page1.html', context)
     else:
-        # form = LoginForm()
-        # return redirect('login')
         print('login needed - ', request.session['user_id'])
         return render(request, 'page1.html')
 
@@ -220,18 +218,25 @@ def upload(request) :
 
 
 
-##########
+####################
 ## Page 2
+
 
 # 음성서비스 페이지
 def read(request):
-
-
-    contents = ContentTb.objects.all()
-    books = BookTb.objects.all()
-    context = {'contents': contents,
-               'books': books}
-    return render(request, 'page2.html', context)
+    if request.session.get('user_id') and request.session.get('name'):
+        username = request.session['name']
+        users = UserTb.objects.get(user_id=request.session['user_id'])
+        books = BookTb.objects.all().filter(user=request.session['user_id'])
+        contents = ContentTb.objects.all()
+        context = {
+            'username': username,
+            'users': users,
+            'contents': contents,
+            'books': books,
+        }
+        print('logged in - ', request.session['user_id'])
+        return render(request, 'page2.html', context)
 
 
 # 책이름 수정
@@ -254,7 +259,7 @@ def deleteBook(request, book_id):
 
 
 
-##########
+####################
 ## Users Related Views
 
 
@@ -292,7 +297,7 @@ def login(request):
         pw = request.POST['pw']
         # 앞이 db 컬럼, 뒤가 받아오는 정보
         user = UserTb.objects.get(user_id = user_id, pw = pw)
-        print('user result - ', user)
+        print('user - ', user)
 
         context={}
         if user is not None:

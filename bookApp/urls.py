@@ -20,7 +20,7 @@ urlpatterns = [
 
     # bookList
     path('editTitle/', views.editTitle, name='editTitle'),
-    path('/<int:book_id>/deleteBook/', views.deleteBook, name='deleteBook'),
+    path('<int:book_id>/deleteBook/', views.deleteBook, name='deleteBook'),
 
 ]
 

@@ -48,11 +48,11 @@
       </div>
       <div class="info__box">
         <!-- <div class="nickname">nickname</div> -->
-          {% if users %}
+          {% if username %}
           <div class="login-active">
-              <label class="username">{{users}}</label>
+              <label class="username">{{username}}</label>
               <a href="{% url 'logout' %}"><label class="logout">Logout</label></a>
-<!--              <a href="#"><label class="mypage">My Page</label></a>-->
+
           </div>
           {% else %}
           <div class="logged-out">
@@ -64,7 +64,7 @@
 
      <script>
           $(document).ready(function() {
-              if({{users}}) {
+              if({{username}}) {
                 $('login-active').show();
                 $('logged-out').hide();
               }
