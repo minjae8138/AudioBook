@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from .models import *
 from .forms import UserForm
 from .apps import *
@@ -228,12 +228,14 @@ def read(request):
         username = request.session['name']
         users = UserTb.objects.get(user_id=request.session['user_id'])
         books = BookTb.objects.all().filter(user=request.session['user_id'])
+        # book_id = books.id
         contents = ContentTb.objects.all()
         context = {
             'username': username,
             'users': users,
             'contents': contents,
             'books': books,
+            # 'book_id': book_id,
         }
         print('logged in - ', request.session['user_id'])
         return render(request, 'page2.html', context)
@@ -247,11 +249,13 @@ def editTitle(request):
 
 # 동화책 삭제
 
-def deleteBook(request, book_id):
-    book = BookTb.objects.get(pk=book_id)
-    book.delete()
+def deleteBook(request, pk):
+    bookTitle = get_object_or_404(BookTb, pk=pk)
+    bookContents = ContentTb.objects.all().filter(book=pk)
+    bookContents.delete()
+    bookTitle.delete()
     return redirect('read')
-
+       
 
 
 
