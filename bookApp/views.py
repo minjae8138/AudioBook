@@ -59,13 +59,11 @@ def index(request):
         print('logged in - ', request.session['user_id'])
         return render(request, 'page1.html', context)
     else:
-<<<<<<< HEAD
+
         # form = LoginForm()
         # return redirect('login')
-        # print('login needed - ', request.session['user_id'])
-=======
         print('login needed - ', request.session['user_id'])
->>>>>>> 8192856f33e1afadf33f505e7562d64b05fcc653
+
         return render(request, 'page1.html')
 
 
@@ -203,26 +201,18 @@ def upload(request) :
 
 # 음성서비스 페이지
 def read(request):
-<<<<<<< HEAD
-    user_id = UserTb.objects.get(user_id=request.session['user_id'])
-    print(user_id)
-    # BookTb로부터 로그인된 user_id에 해당하는 Book정보를 가져온다
-    book_info = BookTb.objects.values_list().filter(user=user_id) # multiple_value를 가져오고 slicing을 위해 values_list()를 사용
-    # print("book_info-----------",book_info)
-    n_len = len(book_info)
 
-    # ContentTb의 text만 추출하기 위해  여기선 values로 받아왔음
-    contents = ContentTb.objects.values().filter(book = book_info[n_len-1][0])
-    books = BookTb.objects.all()
-    context = {'contents': contents,
-               'books': books}
-    return render(request, 'page2.html', context)
-=======
+
+
     if request.session.get('user_id') and request.session.get('name'):
         username = request.session['name']
         users = UserTb.objects.get(user_id=request.session['user_id'])
         books = BookTb.objects.all().filter(user=request.session['user_id'])
-        contents = ContentTb.objects.all()
+
+        # book_info - user_id의 여러 책중 특정 책을 가져오기 위해 리스트 형식에서 추출하기 위해 필요
+        book_info = BookTb.objects.values_list().filter(user=users)
+        n_len = len(book_info)
+        contents = ContentTb.objects.values().filter(book = book_info[n_len-1][0])
         context = {
             'username': username,
             'users': users,
@@ -231,7 +221,7 @@ def read(request):
         }
         print('logged in - ', request.session['user_id'])
         return render(request, 'page2.html', context)
->>>>>>> 8192856f33e1afadf33f505e7562d64b05fcc653
+
 
 
 # 책이름 수정
