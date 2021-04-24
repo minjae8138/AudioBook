@@ -135,12 +135,7 @@ def get_book_evaluation_predict(text_list):
 
 
 # 파일 업로드
-<<<<<<< HEAD
 
-=======
-# 로그인 데코레이터 추가
-# @login_required
->>>>>>> 0fc67644688eed0149eb501d19932d8f96c69454
 def upload(request) :
     file = request.FILES['text']
 
@@ -231,20 +226,6 @@ def upload(request) :
 # 음성서비스 페이지
 def read(request):
 
-<<<<<<< HEAD
-
-    # return render(request, 'page2.html')
-=======
-    # if request.session.get('user_id') and request.session.get('name'):
-    #     context = {'user_id' : request.session['user_id'],
-    #                'name' : request.session['name']}
-    #     print('logged in - ', context['user_id'])
-    #     return render(request, 'page2.html', context)
-    # else:
-    #     print('login needed - ', request.session.get('user_id'))
-    #     return render(request, 'login.html')
-    # # return render(request, 'page2.html')
->>>>>>> 0fc67644688eed0149eb501d19932d8f96c69454
 
     contents = ContentTb.objects.all()
     books = BookTb.objects.all()
@@ -361,5 +342,3 @@ def logout(request):
 
     return redirect('index')
 
-
-#
