@@ -11,6 +11,25 @@
   <title>Document</title>
   <link href="{% static 'css/style2.css'%}" rel="stylesheet">
 
+
+<!--이거 css/style2.css에 넣어주세요!(protection 걸려있네요)-->
+<style>
+
+.list-no-item{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  min-height: 100px;
+  margin: auto;
+  padding: 10px;
+  padding-bottom: 13px;
+  color: white;
+ }
+
+</style>
+
+
 </head>
 
 <body>
@@ -64,111 +83,134 @@
           <h3>나의 동화책 모음</h3>
         </div>
         <br>
-        <div class="book-list">
-            <div class="list-item">
-              빨간모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              주황모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              노란모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              초록모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              파란모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              남색모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              보라모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              빨간모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              주황모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              노란모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              연두모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              하늘모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              황금모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
-            <div class="list-item">
-              빨간모자
-              <div class="btns">
-                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>
-                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>
-              </div>
-            </div>
 
+<!--          login session id 받아서 BookTb user_id 일치하는 것만 표시-->
+        <div class="book-list">
+            {%  for book in books  %}
+                {% if book.book_name %}
+                    <div class="list-item">
+                        {{book.book_name}}
+                        <div class="btns">
+                            <a href="#" class="editTitle"><span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span></a>
+                            <a href="#" class="deleteBook"><span><img class="delBtn" src="{% static 'src/delete.png' %}"></span></a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="list-no-item">
+                        <div class="btns">
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <div class="delete-later">
+<!--        <div class="book-list">-->
+<!--            <div class="list-item">-->
+<!--              빨간모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              주황모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              노란모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              초록모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              파란모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              남색모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              보라모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              빨간모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              주황모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              노란모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              연두모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              하늘모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              황금모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="list-item">-->
+<!--              빨간모자-->
+<!--              <div class="btns">-->
+<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
+<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
+<!--              </div>-->
+<!--            </div>-->
         </div>
       </div>
     </div>
+  </div>
 
-</div>
+
 
 <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
 <script>
@@ -176,23 +218,22 @@
     // 남자, 여자 전환될 때 소리 자동으로 멈추게 하기(changeEvent&evenListner)
     // 버튼 색깔 다르게 하기
 
-        $(document).ready( function() {
-            $('button.btn-male').click( function(){
-                $('div.container-female').hide();
-                $('div.container-male').show();
-                $(this).addClass('clicked');
-                $('.btn-female').removeClass('clicked');
-            });
-            $('button.btn-female').click( function(){
-                $('div.container-male').hide();
-                $('div.container-female').show();
-                $(this).addClass('clicked');
-                $('.btn-male').removeClass('clicked');
-            });
+    $(document).ready( function() {
+        $('button.btn-male').click( function(){
+            $('div.container-female').hide();
+            $('div.container-male').show();
+            $(this).addClass('clicked');
+            $('.btn-female').removeClass('clicked');
         });
+        $('button.btn-female').click( function(){
+            $('div.container-male').hide();
+            $('div.container-female').show();
+            $(this).addClass('clicked');
+            $('.btn-male').removeClass('clicked');
+        });
+    });
 
-
-    </script>
+</script>
 
 </body>
 

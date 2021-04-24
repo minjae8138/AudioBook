@@ -45,23 +45,11 @@ def test(request):
 # kor = Komoran()
 
 
+
+##########
+## Page 1
+
 # 기본페이지, 세션유지
-
-
-# def showName(request):
-#     if request.session.get('user_id') and request.session.get('name'):
-#         user = UserTb.objects.all()
-#         context = {'user_id' : request.session['user_id'],
-#                    'name' : request.session['name']}
-#         print('logged in - ', context['user_id'])
-#         return render(request, 'page1.html', context)
-#     else:
-#         # form = LoginForm()
-#         # return redirect('login')
-#         print('login needed - ', request.session['user_id'])
-#         return render(request, 'page1.html')
-
-
 
 def index(request):
     if request.session.get('user_id') and request.session.get('name'):
@@ -75,27 +63,6 @@ def index(request):
         print('login needed - ', request.session['user_id'])
         return render(request, 'page1.html')
 
-
-#
-# def index(request):
-#     if request.session.get('user_id') and request.session.get('name'):
-#         context = {'user_id' : request.session['user_id'],
-#                    'name' : request.session['name']}
-#         print('logged in - ', context['user_id'])
-#         return render(request, 'page1.html', context)
-#     else:
-#         # form = LoginForm()
-#         # return redirect('login')
-#         print('login needed - ', request.session['user_id'])
-#         return render(request, 'page1.html')
-
-
-
-#
-# def read(request):
-#     contents = ContentTb.objects.all()
-#     context = {'contents': contents}
-#     return render(request, 'page2.html', context)
 
 
 
@@ -132,8 +99,9 @@ def pred(test_file):
 
     return test_file
 
+
+
 # 파일 업로드
-# 로그인 데코레이터 추가
 
 def upload(request) :
     file = request.FILES['text']
@@ -218,17 +186,45 @@ def upload(request) :
     return redirect('read')
 
 
-# 음성서비스 페이지, 세션 유지
+
+##########
+## Page 2
+
+# 음성서비스 페이지
 def read(request):
 
 
     # return render(request, 'page2.html')
 
     contents = ContentTb.objects.all()
-    context = {'contents': contents}
+    books = BookTb.objects.all()
+    context = {'contents': contents,
+               'books': books}
     return render(request, 'page2.html', context)
 
 
+# 책이름 수정
+
+def editTitle(request):
+    pass
+
+
+# 동화책 삭제
+
+def deleteBook(request, book_id):
+    book = BookTb.objects.get(pk=book_id)
+    book.delete()
+    return redirect('read')
+
+
+
+
+
+
+
+
+##########
+## Users Related Views
 
 
 # 회원가입
@@ -256,7 +252,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import UserForm, LoginForm
 from django.contrib.auth import login, authenticate
-
 
 
 def login(request):
@@ -306,10 +301,6 @@ def login(request):
         return render(request, 'login.html', {'form':form})
 
 
-
-
-
-
 # 로그아웃
 def logout(request):
     request.session['user_id'] = {}
@@ -319,3 +310,6 @@ def logout(request):
     print('로그아웃 성공')
 
     return redirect('index')
+
+
+#
