@@ -35,18 +35,7 @@
 
       </form>
 
-      <script>
-        function loginCheck(){
-          if({{username}}){
-            return True;
-          }
-          else{
-            alert("로그인이 필요합니다");
-            return False;
-          }
-        }
 
-      </script>
 
     </div>
 
@@ -54,4 +43,20 @@
   {% include 'footer.html' %}
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script  src="{% static 'js/drag.js'%}"></script>
+  <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
 
+  <script>
+    function loginCheck(){
+      if({{username}}){
+        console.log(1)
+        return True;
+      }
+      else{
+        alert("로그인이 필요합니다");
+        console.log(2)
+        return False;
+      }
+    }
+  <!--        loginCheck()-->
+
+  </script>
