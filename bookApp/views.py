@@ -10,6 +10,7 @@ from .apps import *
 import re
 import pandas as pd
 import numpy as np
+import subprocess
 
 
 # 모델
@@ -133,6 +134,7 @@ def del_useless(text_list, del_list):
 #
 #     return test_file
 
+# 모델 불러와서 감정 예측하는 함수
 def get_book_evaluation_predict(text_list):
     print("start_predict")
     text_feeling_list = []
@@ -162,6 +164,66 @@ def get_book_evaluation_predict(text_list):
     print(text_feeling_list)
     return text_feeling_list
 
+# tts합성을 위한 ssml태그 문자열 생성
+def get_tts_text(text_feeling_lists):
+    book_text = "<speak>"
+    pre = 9999
+    b1,b2,b3,b4,b5 = 3,3,3,3,3
+
+    for text_feeling_list in text_feeling_lists:
+        text = text_feeling_list[0]
+        sentiment = text_feeling_list[1]
+        if sentiment == 0:
+            bgm = ''
+        if sentiment == 1:
+            bgm = '<audio src="http://116.44.136.77/1peace.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b1),
+                                                                                                        str(b1 + 3))
+            b1 += 3
+        if sentiment == 2:
+            bgm = '<audio src="http://116.44.136.77/2angry.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b2),
+                                                                                                        str(b2 + 3))
+            b2 += 3
+        if sentiment == 3:
+            bgm = '<audio src="http://116.44.136.77/3veryangry.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b3),
+                                                                                                            str(
+                                                                                                                b3 + 3))
+            b3 += 3
+        if sentiment == 4:
+            bgm = '<audio src="http://116.44.136.77/4sad.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b4),
+                                                                                                      str(b4 + 3))
+            b4 += 4
+        if sentiment == 5:
+            bgm = '<audio src="http://116.44.136.77/5janjan.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b5),
+                                                                                                         str(
+                                                                                                             b5 + 3))
+            b5 += 5
+        sentence_text = '<voice name="WOMAN_DIALOG_BRIGHT"><prosody rate="slow" volume="loud">' + bgm + text + '</prosody></voice>'
+        book_text = book_text + sentence_text
+
+    book_text = book_text + "</speak>"
+    print(book_text)
+
+    return book_text
+
+
+# ssml텍스트 태그를 기반으로 음성합성 서비스
+# 민재 b4e5257e61f7df0c8994a5d5eaf6ff58
+# 창훈 2607c58891135f8fdd19a8d0206e9f2f
+def get_tts_voice(book_text):
+
+    url = "https://kakaoi-newtone-openapi.kakao.com/v1/synthesize"
+    key = "2607c58891135f8fdd19a8d0206e9f2f"
+    res = subprocess.Popen(['curl', '-v', '-X', 'POST', url,
+                        '-H', "Content-Type: application/xml",
+                        '-H', "Authorization:"+key,
+                        '-d', book_text], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+    output, err = res.communicate()
+
+    f = open('./audio/book_final.wav', 'wb')
+    # print(output)
+    f.write(output)
+    f.close()
+    print(err)
 
 
 
@@ -198,9 +260,16 @@ def upload(request) :
     fin_list = del_useless(mid, ['', ' ', '  ' '.', "“", "”"])
 
     fin = fin_list[:]
+    # 감정예측
+    text_feeling_lists = get_book_evaluation_predict(fin)
+    # ssml 태그 생성
+    book_text = get_tts_text(text_feeling_lists)
+    # ssml 태그기반 음성합성 실시
+    get_tts_voice(book_text)
+
     # print(fin)
     # 모델 적용 후 DB에 저장
-    get_book_evaluation_predict(fin)
+
     # for i in range(len(fin)) :
     #     print(i,fin[i])
 
