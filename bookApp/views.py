@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from .models import *
 from .forms import UserForm
 from .apps import *
@@ -47,57 +47,26 @@ def test(request):
 # kor = Komoran()
 
 
+
+####################
+## Page 1
+
 # 기본페이지, 세션유지
-
-
-# def showName(request):
-#     if request.session.get('user_id') and request.session.get('name'):
-#         user = UserTb.objects.all()
-#         context = {'user_id' : request.session['user_id'],
-#                    'name' : request.session['name']}
-#         print('logged in - ', context['user_id'])
-#         return render(request, 'page1.html', context)
-#     else:
-#         # form = LoginForm()
-#         # return redirect('login')
-#         print('login needed - ', request.session['user_id'])
-#         return render(request, 'page1.html')
-
-
 
 def index(request):
     if request.session.get('user_id') and request.session.get('name'):
-        users = UserTb.objects.all()
-        context = {'users':users}
-        print('logged in - ')
+        # users = UserTb.objects.all()
+        context = {'username':request.session['name']}
+        print('logged in - ', request.session['user_id'])
         return render(request, 'page1.html', context)
     else:
+
         # form = LoginForm()
         # return redirect('login')
         print('login needed - ', request.session['user_id'])
+
         return render(request, 'page1.html')
 
-
-#
-# def index(request):
-#     if request.session.get('user_id') and request.session.get('name'):
-#         context = {'user_id' : request.session['user_id'],
-#                    'name' : request.session['name']}
-#         print('logged in - ', context['user_id'])
-#         return render(request, 'page1.html', context)
-#     else:
-#         # form = LoginForm()
-#         # return redirect('login')
-#         print('login needed - ', request.session['user_id'])
-#         return render(request, 'page1.html')
-
-
-
-#
-# def read(request):
-#     contents = ContentTb.objects.all()
-#     context = {'contents': contents}
-#     return render(request, 'page2.html', context)
 
 
 
@@ -227,20 +196,27 @@ def get_tts_voice(book_text):
 
 
 
+
+
 # 파일 업로드
-# 로그인 데코레이터 추가
-# @login_required
+
 def upload(request) :
     file = request.FILES['text']
 
-    # 파일이 업로드 되었으면 bookTb에 정보 저장
-    # userTb에서 user_id 가져오기
-    # me = UserTb.objects.get(user_id='test')
-    # if file :
-    #     book = BookTb(
-    #         user =  me
-    #     )
-    #     book.save()
+    # session을 통해 user_id 가져오기
+    print('----------------------------> ', request.session['user_id'])
+    user_id = UserTb.objects.get(user_id = request.session['user_id'])
+
+    # book_name 가져오기
+    book_name = request.POST['bookname']
+    print("book_name",book_name)
+
+    # bookTb에 파일 정보 저장
+    book = BookTb(
+        user =  user_id,
+        book_name = book_name
+    )
+    book.save()
 
     # 인코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
     try :
@@ -258,7 +234,6 @@ def upload(request) :
     r_cont = re.sub("\n", " ", r_cont)
     mid = re.split('[".]', r_cont)
     fin_list = del_useless(mid, ['', ' ', '  ' '.', "“", "”"])
-
     fin = fin_list[:]
     # 감정예측
     text_feeling_lists = get_book_evaluation_predict(fin)
@@ -317,27 +292,82 @@ def upload(request) :
     #     print("cont------------>",cont)
 
 
+    fin_text_list = get_book_evaluation_predict(fin)
+
+
+    # contentTb에 데이터 저장
+    cnt = 0
+    for i in range(len(fin)) :
+        # print("fin[i]------------>",fin[i], fin[i][1])
+        cnt += 1
+        cont = ContentTb(
+            sentence_id = cnt,
+            text = fin_text_list[i][0],
+            feeling = fin_text_list[i][1],
+            book = book
+        )
+        cont.save()
+        print("cont------------>",cont)
+
     return redirect('read')
 
 
-# 음성서비스 페이지, 세션 유지
+
+####################
+## Page 2
+
+
+# 음성서비스 페이지
 def read(request):
 
-    # if request.session.get('user_id') and request.session.get('name'):
-    #     context = {'user_id' : request.session['user_id'],
-    #                'name' : request.session['name']}
-    #     print('logged in - ', context['user_id'])
-    #     return render(request, 'page2.html', context)
-    # else:
-    #     print('login needed - ', request.session.get('user_id'))
-    #     return render(request, 'login.html')
-    # # return render(request, 'page2.html')
-
-    contents = ContentTb.objects.all()
-    context = {'contents': contents}
-    return render(request, 'page2.html', context)
 
 
+    if request.session.get('user_id') and request.session.get('name'):
+        username = request.session['name']
+        users = UserTb.objects.get(user_id=request.session['user_id'])
+        books = BookTb.objects.all().filter(user=request.session['user_id'])
+
+        # book_info - user_id의 여러 책중 특정 책을 가져오기 위해 리스트 형식에서 추출하기 위해 필요
+        book_info = BookTb.objects.values_list().filter(user=users)
+        n_len = len(book_info)
+        contents = ContentTb.objects.values().filter(book = book_info[n_len-1][0])
+
+        context = {
+            'username': username,
+            'users': users,
+            'contents': contents,
+            'books': books,
+            # 'book_id': book_id,
+        }
+        print('logged in - ', request.session['user_id'])
+        return render(request, 'page2.html', context)
+
+
+
+# 책이름 수정
+
+def editTitle(request):
+    pass
+
+
+# 동화책 삭제
+
+def deleteBook(request, pk):
+    bookTitle = get_object_or_404(BookTb, pk=pk)
+    bookContents = ContentTb.objects.all().filter(book=pk)
+    bookContents.delete()
+    bookTitle.delete()
+    return redirect('read')
+       
+
+
+
+
+
+
+
+####################
+## Users Related Views
 
 
 # 회원가입
@@ -367,7 +397,6 @@ from .forms import UserForm, LoginForm
 from django.contrib.auth import login, authenticate
 
 
-
 def login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -375,7 +404,7 @@ def login(request):
         pw = request.POST['pw']
         # 앞이 db 컬럼, 뒤가 받아오는 정보
         user = UserTb.objects.get(user_id = user_id, pw = pw)
-        print('user result - ', user)
+        print('user - ', user)
 
         context={}
         if user is not None:
@@ -415,10 +444,6 @@ def login(request):
         return render(request, 'login.html', {'form':form})
 
 
-
-
-
-
 # 로그아웃
 def logout(request):
     request.session['user_id'] = {}
@@ -428,3 +453,4 @@ def logout(request):
     print('로그아웃 성공')
 
     return redirect('index')
+
