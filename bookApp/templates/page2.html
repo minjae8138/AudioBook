@@ -39,7 +39,7 @@
         <div class="audios">
           <div class="container-male">
             <div class="top-2" name="audio bar">
-              <audio controls>
+              <audio id="audio-male" controls>
                 <source src="{% static 'src/sample_audio_1.mp3' %}">
               </audio>
             </div>
@@ -48,7 +48,7 @@
           <div class="container-female hidden">
 
             <div class="top-2" name="audio bar">
-              <audio controls>
+              <audio id="audio-female" controls>
                 <source src="{% static 'src/sample_audio_2.mp3' %}">
               </audio>
             </div>
@@ -92,7 +92,7 @@
                         {{book.book_name}}
                         <div class="btns">
                             <a href="#" class="editTitle"><span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span></a>
-                            <a href="#" class="deleteBook"><span><img class="delBtn" src="{% static 'src/delete.png' %}"></span></a>
+                            <a href="{% url 'delete' pk=book.pk %}" class="deleteBook"><span><img class="delBtn" src="{% static 'src/delete.png' %}"></span></a>
                         </div>
                     </div>
                 {% else %}
@@ -215,21 +215,22 @@
 <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
 <script>
 
-    // 남자, 여자 전환될 때 소리 자동으로 멈추게 하기(changeEvent&evenListner)
-    // 버튼 색깔 다르게 하기
-
     $(document).ready( function() {
         $('button.btn-male').click( function(){
             $('div.container-female').hide();
             $('div.container-male').show();
             $(this).addClass('clicked');
             $('.btn-female').removeClass('clicked');
+            $('#audio-female').get(0).pause();
+            $('#audio-female').get(0).currentTime = 0;
         });
         $('button.btn-female').click( function(){
             $('div.container-male').hide();
             $('div.container-female').show();
             $(this).addClass('clicked');
             $('.btn-male').removeClass('clicked');
+            $('#audio-male').trigger('pause');
+            $('#audio-male').get(0).currentTime = 0;
         });
     });
 

@@ -51,12 +51,13 @@
           {% if username %}
           <div class="login-active">
               <label class="username">{{username}}</label>
-              <a href="{% url 'logout' %}"><label class="logout">Logout</label></a>
+              <a href="{% url 'logout' %}"><label class="logout">로그아웃</label></a>
 
           </div>
           {% else %}
           <div class="logged-out">
-              <a href="{% url 'login' %}"><label class="login">Login</label></a>
+              <a href="{% url 'login' %}"><label class="login">로그인</label></a>
+              <a href="{% url 'signup' %}"><label class="signup">회원가입</label></a>
           </div>
           {% endif %}
 

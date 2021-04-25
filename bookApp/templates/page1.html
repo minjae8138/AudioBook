@@ -29,23 +29,24 @@
       <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data" onsubmit="return loginCheck();">
         {% csrf_token %}
         <input type="file" id="files" name="text" />
+<!--        BookTb의 book_name으로 동화제목 저장 필요-->
         <input type="text" id="bookname" name="bookname"/>
         <div class="submit"><input type="submit" value="음성변환" /></div>
 
       </form>
 
-        <script>
+      <script>
         function loginCheck(){
-            if(request.session.['user_id']){
-                alert('로그인이 필요합니다');
-                return False;
-            }
-            else{
-                return True;
-            }
+          if({{username}}){
+            return True;
+          }
+          else{
+            alert("로그인이 필요합니다");
+            return False;
+          }
         }
 
-        </script>
+      </script>
 
     </div>
 
