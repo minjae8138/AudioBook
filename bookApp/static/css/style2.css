@@ -4,8 +4,7 @@ audio {
 
 .audios {
   position: absolute;
-  left: 19%;
-  top: 3%;
+  left: 23%;
 }
 
 .container {
@@ -16,7 +15,7 @@ audio {
 .left {
   position: relative;
   margin-top: 50px;
-  height: 700px;
+  height: 550px;
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
@@ -78,8 +77,8 @@ audio {
 
 .box {
   background-color: #2b2a49;
-  width: 900px;
-  height: 500px;
+  width: 700px;
+  height: 350px;
   font-size: 20px;
   margin-left: 110px;
   list-style: none;
@@ -108,8 +107,8 @@ audio {
 .container-list {
   position: relative;
   padding: 10px;
-  width: 100%;
-  height: 700px;
+  width: 90%;
+
   margin: auto;
   margin-top: 50px;
   margin-bottom: 30px;
@@ -175,4 +174,14 @@ audio {
   padding-bottom: 13px;
   color: white;
  }
+
+.getBtn {
+  background-color: #2b2a49;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  color: white;
+}
+
+
 

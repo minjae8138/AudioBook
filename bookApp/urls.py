@@ -20,6 +20,7 @@ urlpatterns = [
     # Page 2
     path('read/', views.read, name='read'),
     path('<pk>/delete/', views.deleteBook, name='delete'),
+    path('bookList/', views.bookList, name='bookList'),
 
 ]
 

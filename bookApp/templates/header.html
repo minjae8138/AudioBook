@@ -85,6 +85,37 @@
 <!--    <span class="site-heading-lower">book</span>-->
 <!--  </h1>-->
   <!--------------- book: navi bar  --------------->
+<<<<<<< HEAD
+=======
+ <header class="header">
+      <div id="bg">
+        <img src="{% static 'src/rio2.jpeg'%}" />
+      </div>
+      <div class="logo">
+        <img src="{% static 'src/pobica.jpg'%}" />
+      </div>
+      <div class="menus">
+        <div class="menu">menu1</div>
+        <div class="menu">menu2</div>
+        <div class="menu">menu3</div>
+        <div class="menu">menu4</div>
+        <div class="menu">menu5</div>
+      </div>
+      <div class="info__box">
+        <!-- <div class="nickname">nickname</div> -->
+          {% if username %}
+          <div class="login-active">
+              <label class="username">{{username}}</label>
+              <a href="{% url 'logout' %}"><label class="logout">로그아웃</label></a>
+
+          </div>
+          {% else %}
+          <div class="logged-out">
+              <a href="{% url 'login' %}"><label class="login">로그인</label></a>
+              <a href="{% url 'signup' %}"><label class="signup">회원가입</label></a>
+          </div>
+          {% endif %}
+>>>>>>> 600d03d3ec35336bdc6a2c719e588b5af80d1396
 
   <header class="header">
     <div id="bg">
