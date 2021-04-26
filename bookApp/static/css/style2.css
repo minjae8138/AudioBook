@@ -161,3 +161,14 @@ audio {
   width: 20px;
   height: 20px;
 }
+
+.getBtn {
+  background-color: #2b2a49;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  color: white;
+}
+
+
+

@@ -21,6 +21,7 @@ urlpatterns = [
     # bookList
     path('editTitle/', views.editTitle, name='editTitle'),
     path('<pk>/delete/', views.deleteBook, name='delete'),
+    path('bookList/', views.bookList, name='bookList'),
 
 ]
 

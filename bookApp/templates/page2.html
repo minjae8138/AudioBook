@@ -40,7 +40,7 @@
           <div class="container-male">
             <div class="top-2" name="audio bar">
               <audio id="audio-male" controls>
-                <source src="{% static 'src/sample_audio_1.mp3' %}">
+                <source src="{% static 'audio/book_fina.wav' %}">
               </audio>
             </div>
           </div>
@@ -49,7 +49,7 @@
 
             <div class="top-2" name="audio bar">
               <audio id="audio-female" controls>
-                <source src="{% static 'src/sample_audio_2.mp3' %}">
+                <source src="{% static 'audio/book_final.wav' %}">
               </audio>
             </div>
           </div>
@@ -85,126 +85,34 @@
         <br>
 
 <!--          login session id 받아서 BookTb user_id 일치하는 것만 표시-->
-        <div class="book-list">
-            {%  for book in books  %}
-                {% if book.book_name %}
-                    <div class="list-item">
-                        {{book.book_name}}
-                        <div class="btns">
-                            <a href="#" class="editTitle"><span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span></a>
-                            <a href="{% url 'delete' pk=book.pk %}" class="deleteBook"><span><img class="delBtn" src="{% static 'src/delete.png' %}"></span></a>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="list-no-item">
-                        <div class="btns">
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
 
-        </div>
+          <form class="get-name" action="{% url 'bookList' %}" method="post">
+          {% csrf_token %}
+              <div class="book-list">
+                {%  for book in books  %}
+                    {% if book.book_name %}
+                        <div class="list-item">
+
+                            <button class="getBtn" type="submit" name="getBookName" value="{{book.book_name}}">{{book.book_name}}</button>
+                            <div class="btns">
+                                <a href="#" class="editTitle"><span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span></a>
+                                <a href="{% url 'delete' pk=book.pk %}" class="deleteBook"><span><img class="delBtn" src="{% static 'src/delete.png' %}"></span></a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="list-no-item">
+                            <div class="btns">
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+              </div>
+          </form>
+
 
         <div class="delete-later">
-<!--        <div class="book-list">-->
-<!--            <div class="list-item">-->
-<!--              빨간모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              주황모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              노란모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              초록모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              파란모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              남색모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              보라모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              빨간모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              주황모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              노란모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              연두모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              하늘모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              황금모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="list-item">-->
-<!--              빨간모자-->
-<!--              <div class="btns">-->
-<!--                <span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span>-->
-<!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
-<!--              </div>-->
-<!--            </div>-->
+
         </div>
       </div>
     </div>
@@ -212,29 +120,30 @@
 
 
 
-<script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
-<script>
+    <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
 
-    $(document).ready( function() {
-        $('button.btn-male').click( function(){
-            $('div.container-female').hide();
-            $('div.container-male').show();
-            $(this).addClass('clicked');
-            $('.btn-female').removeClass('clicked');
-            $('#audio-female').get(0).pause();
-            $('#audio-female').get(0).currentTime = 0;
-        });
-        $('button.btn-female').click( function(){
-            $('div.container-male').hide();
-            $('div.container-female').show();
-            $(this).addClass('clicked');
-            $('.btn-male').removeClass('clicked');
-            $('#audio-male').trigger('pause');
-            $('#audio-male').get(0).currentTime = 0;
-        });
-    });
+    <script>
 
-</script>
+        $(document).ready( function() {
+            $('button.btn-male').click( function(){
+                $('div.container-female').hide();
+                $('div.container-male').show();
+                $(this).addClass('clicked');
+                $('.btn-female').removeClass('clicked');
+                $('#audio-female').get(0).pause();
+                $('#audio-female').get(0).currentTime = 0;
+            });
+            $('button.btn-female').click( function(){
+                $('div.container-male').hide();
+                $('div.container-female').show();
+                $(this).addClass('clicked');
+                $('.btn-male').removeClass('clicked');
+                $('#audio-male').trigger('pause');
+                $('#audio-male').get(0).currentTime = 0;
+            });
+        });
+
+    </script>
 
 </body>
 

@@ -196,7 +196,7 @@ def get_tts_voice(book_text):
                         '-d', book_text], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
     output, err = res.communicate()
 
-    f = open('./audio/book_final.wav', 'wb')
+    f = open('../audio/book_fina.wav', 'wb')
     # print(output)
     f.write(output)
     f.close()
@@ -366,7 +366,31 @@ def deleteBook(request, pk):
     bookContents.delete()
     bookTitle.delete()
     return redirect('read')
-       
+
+
+
+
+
+
+def bookList(request) :
+    if request.session.get('user_id') and request.session.get('name'):
+        username = request.session['name']
+        users = UserTb.objects.get(user_id=request.session['user_id'])
+        books = BookTb.objects.all().filter(user=request.session['user_id'])
+
+
+        bookname = request.POST.get('getBookName')
+
+        book_info = BookTb.objects.values_list().filter(book_name=bookname)
+        contents = ContentTb.objects.values().filter(book=book_info[0][0])
+        print("contents------->",contents)
+        context = {
+            'username': username,
+            'users': users,
+            'contents': contents,
+            'books': books,
+        }
+    return render(request, 'page2.html', context)
 
 
 

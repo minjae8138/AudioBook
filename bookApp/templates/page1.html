@@ -27,7 +27,6 @@
         </div>
       <!-- 데이터 전송 -->
       <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data" onsubmit="return loginCheck();">
-<<<<<<< HEAD
            {% csrf_token %}
           <div class="upload-left">
           <div class="file">
@@ -58,6 +57,7 @@
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
   <script src="{% static 'js/page1.js' %}"></script>
+
   <script>
 
 
@@ -78,7 +78,7 @@
         <div class="submit"><input type="submit" value="음성변환" /></div>
 
       </form>
-
+    </script>
       <script>
 
         function loginCheck(){
