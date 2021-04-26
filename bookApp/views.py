@@ -5,11 +5,11 @@ from django.shortcuts import render , redirect
 from .models import *
 from .forms import UserForm
 from .apps import *
-
-# 파이썬
-import re
-import pandas as pd
-import numpy as np
+#
+# # 파이썬
+# import re
+# import pandas as pd
+# import numpy as np
 
 
 # 모델
@@ -150,11 +150,11 @@ def upload(request) :
     print("book_name",book_name)
 
     # bookTb에 파일 정보 저장
-    book = BookTb(
-        user =  user_id,
-        book_name = book_name
-    )
-    book.save()
+    # book = BookTb(
+    #     user =  user_id,
+    #     book_name = book_name
+    # )
+    # book.save()
 
     # 인코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
     try :
@@ -175,21 +175,21 @@ def upload(request) :
     fin = fin_list[:]
 
     fin_text_list = get_book_evaluation_predict(fin)
-
+    print(fin_text_list)
 
     # contentTb에 데이터 저장
-    cnt = 0
-    for i in range(len(fin)) :
-        # print("fin[i]------------>",fin[i], fin[i][1])
-        cnt += 1
-        cont = ContentTb(
-            sentence_id = cnt,
-            text = fin_text_list[i][0],
-            feeling = fin_text_list[i][1],
-            book = book
-        )
-        cont.save()
-        print("cont------------>",cont)
+    # cnt = 0
+    # for i in range(len(fin)) :
+    #     # print("fin[i]------------>",fin[i], fin[i][1])
+    #     cnt += 1
+    #     cont = ContentTb(
+    #         sentence_id = cnt,
+    #         text = fin_text_list[i][0],
+    #         feeling = fin_text_list[i][1],
+    #         book = book
+    #     )
+    #     cont.save()
+    #     print("cont------------>",cont)
 
     return redirect('read')
 

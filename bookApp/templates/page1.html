@@ -4,37 +4,71 @@
 
 <!--  page1에 적용하는 css-->
     <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'css/loading.css'%}" rel="stylesheet">
+
   </head>
 
 <!-- *************************** book : 화면 START *************************  -->
 
     <div class="main">
       <div class="ment">동화책을 올려주세요 !!!</div>
+        <div id="loader-bg">
+            <div id="loader-fix">
+              <p>Now Loading...</p>
+            </div>
 
-      <!-- 데이터 전송 -->
-<!--      <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data">-->
-<!--        {% csrf_token %}-->
-
-<!--        <div class="drop-zone">-->
-<!--          <div class="btn btn-default btn-file">-->
-<!--            <div class="icon"><i class="fas fa-download"></i></div>-->
-
-<!--            <input type="file" id="file" name="text" />-->
-<!--          </div>-->
-<!--          <div class="info">Click or Drag</div>-->
-<!--        </div>-->
-<!--        <div class="submit"><input type="submit" value="음성변환" /></div>-->
-<!--      </form>-->
+            <div id="loader">
+              <img
+                class="loading-img"
+                src="{% static 'src/rio4.png' %}"
+                alt="Now Loading..."
+              />
+            </div>
+        </div>
       <!-- 데이터 전송 -->
       <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data" onsubmit="return loginCheck();">
-        {% csrf_token %}
-        <input type="file" id="files" name="text" />
-        <input type="text" id="bookname" name="bookname"/>
-        <div class="submit"><input type="submit" value="음성변환" /></div>
+           {% csrf_token %}
+          <div class="upload-left">
+          <div class="file">
+            <input type="file" id="files" name="text" />
+            <label for="files" class="label-file"> &nbsp;파일 선택 </label>
+            <span id="fileName">선택된 파일없음</span>
+          </div>
+          <div class="text">
+            <input
+              type="text"
+              id="bookname"
+              name="bookname"
+              value="저장할 책 이름을 입력해주세요"
+              onfocus="this.value=''"
+            />
+          </div>
+        </div>
+
+          <div class="submit"><input type="submit" value="음성변환" /></div>
 
       </form>
 
-        <script>
+
+    </div>
+
+<!-- *************************** book : 화면 END ***************************  -->
+  {% include 'footer.html' %}
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
+  <script src="{% static 'js/page1.js' %}"></script>
+  <script>
+
+
+      $(window).on("submit", function () {
+        // 처리 중 이미지를 표시
+        var h = $(window).height();
+        $("#loader-bg ,#loader").height(h).css("display", "block");
+      });
+    </script>
+
+    <script>
+
         function loginCheck(){
             if(request.session.['user_id']){
                 alert('로그인이 필요합니다');
@@ -45,12 +79,5 @@
             }
         }
 
-        </script>
-
-    </div>
-
-<!-- *************************** book : 화면 END ***************************  -->
-  {% include 'footer.html' %}
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  <script  src="{% static 'js/drag.js'%}"></script>
+    </script>
 
