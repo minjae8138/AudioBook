@@ -1,30 +1,39 @@
-<!DOCTYPE html>
-{% load static%}
+
+{% include 'title.html' %}
+{% load static %}
+<link href="{% static 'css/login.css' %}" type="text/css" rel="stylesheet">
+
+<!--<style>-->
+<!--    style 추가 여기에-->
+<!--</style>-->
+
+
 {% include 'header.html' %}
+
 <!-- *************************** book : 화면 START *************************  -->
 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-</head>
-
 <div class="container-login">
-    <form method="post" action="">
-        {% csrf_token %}
 
+    <div class="row">
+        <h4>로그인</h4>
+    </div>
 
-        <table class="table-login">
-            {{ form.as_p }}
+    <div class="container-form">
 
-        </table>
+        <form method="post" class="form" action="">
+            {% csrf_token %}
 
-        <div class="btn-submit">
-            <input type="submit" value="로그인"/>
-        </div>
-    </form>
+            <table class="table-form">
+                {{ form.as_table }}
+            </table>
 
+            <div class="btn-submit">
+                <input type="submit" class="btn-form" value="로그인"/>
+            </div>
+        </form>
 
+    </div>
 
 </div>
 
@@ -33,88 +42,9 @@
 </script>
 
 
-<!--<form method="POST" action="." novalidate>-->
-<!--    {% csrf_token %}-->
-<!--    <div>-->
-<!--        <label name="label_user_id" for="{{ form.user_id.id_for_label }}">-->
-<!--            {{ form.user_id.label }}-->
-<!--        </label>-->
-<!--        {{ form.user_id }}-->
-
-<!--        <label name="label_password" for="{{ form.password.password_for_label }}">-->
-<!--            {{ form.password.label }}-->
-<!--        </label>-->
-<!--        {{ form.password }}-->
-
-
-<!--        <script type="text/javascript">-->
-<!--            if (document.getElementsByName('user_id')[0].value != '') {-->
-<!--                document.getElementsByName('label_user_id')[0].setAttribute('class', 'active');-->
-<!--            }-->
-
-<!--            if (document.getElementsByName('password')[0].value != '') {-->
-<!--                document.getElementsByName('label_password')[0].setAttribute('class', 'active');-->
-<!--            }-->
-
-<!--        </script>-->
-
-
-<!--        {% if form.user_id.errors %}-->
-<!--        <script type="text/javascript">-->
-<!--            document.getElementsByName('user_id')[0].setAttribute('class', 'form-control is-invalid')-->
-<!--        </script>-->
-<!--        {% for error in form.user_id.errors %}-->
-<!--        <div class="invalid-feedback">-->
-<!--            {{ error }}-->
-<!--        </div>-->
-
-<!--        {% endfor %}-->
-<!--        {% endif %}-->
-
-<!--        {% if form.password.errors %}-->
-<!--        <script type="text/javascript">-->
-<!--            document.getElementsByName('password')[0].setAttribute('class', 'form-control is-invalid')-->
-<!--        </script>-->
-<!--        {% for error in form.password.errors %}-->
-<!--        <div class="invalid-feedback">-->
-<!--            {{ error }}-->
-<!--        </div>-->
-
-<!--        {% endfor %}-->
-<!--        {% endif %}-->
-<!--    </div>-->
-<!--</form>-->
-
-
-
-
-
-<label>
-    <input type="checkbox" name="remember_session"/>
-    <span>로그인 상태 유지</span>
-</label>
-
-
-
-
-
-
-
-
-
-<body>
-
-
-
-
-</body>
-
-
-
-</html>
-
-
 <!-- *************************** book : 화면 END ***************************  -->
-{% include 'footer.html' %}
+
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script  src="{% static 'js/drag.js'%}"></script>
+
+{% include 'footer.html' %}

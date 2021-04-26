@@ -1,87 +1,133 @@
-<!-- *************************** book : 공통 (HEADER) START  ******************  -->
+{% include 'title.html' %}
+{% load static %}
+    <style>
+        .logo {
+            height: 100px;
+            display: flex;
+        }
+        .logo img {
+            width: 200px;
+            height: 80px;
+            display: block;
+            padding-left: 10px;
+            font-size: 20px;
+            transform: scale(1.2);
+            filter: drop-shadow(3px 10px 8px);
+            color: burlywood;
+        }
 
-<!DOCTYPE html>
-{% load static%}
+        .menu1, .menu2 {
+            color: rgb(13 27 80 / 90%);
+            font-size: 2rem;
+            font-family: 'WandohopeB', sans-serif;
+            letter-spacing: 5px;
+            cursor: pointer;
+            text-shadow: 2px 2px 2px #ecececa8;
+            text-decoration: none;
+        }
 
-<html lang="en">
+        .login, .signup {
+            color: rgb(13 27 80 / 90%);
+            font-size: 1.5rem;
+            font-family: 'Nanum Gothic', sans-serif;
+            cursor: pointer;
+            text-shadow: 2px 2px 2px #4a4a4aa8;
+            text-decoration: none;
+        }
+        .logout {
+            color: rgb(13 27 80 / 90%);
+            font-size: 1.5rem;
+            font-family: 'Nanum Gothic', sans-serif;
+            cursor: pointer;
+            text-shadow: 2px 2px 2px #4a4a4aa8;
+            text-decoration: none;
+        }
+        .menu1:hover {
+            text-decoration: underline;
+            transform: translate( 5px, 10% );
+        }
+        .menu2:hover {
+            text-decoration: underline;
+            transform: translate( 5px, 10% );
+        }
+        .login:hover {
+            text-decoration: underline;
+            transform: translate( 5px, 10% );
+        }
+        .signup:hover {
+            text-decoration: underline;
+            transform: translate( 5px, 10% );
+        }
+        .logout:hover {
+            text-decoration: underline;
 
-<head>
+        }
+        .username {
+            color: rgb(255 255 255 / 90%);
+            font-size: 1.5rem;
+            font-family: 'WandohopeB', sans-serif;
+            text-shadow: 2px 2px 2px #4a4a4aa8;
+        }
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+        a {
+            text-decoration: none;
+        }
 
-  <title>Pobica's Story</title>
- <!--    reset.css   -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
-    />
-  <!-- Custom styles for this template -->
-  <link href="{% static 'css/basic.css'%}" rel="stylesheet">
-    <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
-
+    </style>
 
 </head>
 
+
 <body>
+
   <!--------------- book: 타이틀  --------------->
 
 <!--  <h1 class="site-heading text-center text-white d-none d-lg-block">-->
 <!--    <span class="site-heading-lower">book</span>-->
 <!--  </h1>-->
   <!--------------- book: navi bar  --------------->
- <header class="header">
-      <div id="bg">
-        <img src="{% static 'src/pobica2.jpg'%}" />
-      </div>
-      <div class="logo">
-        <img src="{% static 'src/pobica.jpg'%}" />
-      </div>
-      <div class="menus">
-        <div class="menu">menu1</div>
-        <div class="menu">menu2</div>
-        <div class="menu">menu3</div>
-        <div class="menu">menu4</div>
-        <div class="menu">menu5</div>
-      </div>
-      <div class="info__box">
-        <!-- <div class="nickname">nickname</div> -->
-          {% if username %}
-          <div class="login-active">
-              <label class="username">{{username}}</label>
-              <a href="{% url 'logout' %}"><label class="logout">로그아웃</label></a>
 
-          </div>
-          {% else %}
-          <div class="logged-out">
-              <a href="{% url 'login' %}"><label class="login">로그인</label></a>
-              <a href="{% url 'signup' %}"><label class="signup">회원가입</label></a>
-          </div>
-          {% endif %}
+<header class="header">
+<div id="bg">
+    <img src="{% static 'src/rio2.jpeg'%}" />
+</div>
+<div class="logo">
+    <img src="{% static 'src/pobica_logo.png'%}" />
+</div>
+<div class="menus">
+    <a href="{% url 'index' %}"><div class="menu1">동화책 넣기</div></a>
+    <a href="{% url 'read' %}"><div class="menu2">동화책 읽기</div></a>
+</div>
+<div class="info__box">
+  {% if username %}
+  <div class="login-active">
+      <label class="username">{{username}}</label>
+      <a href="{% url 'logout' %}"><label class="logout">로그아웃</label></a>
+  </div>
 
-      </div>
+  {% else %}
+  <div class="logged-out">
+      <a href="{% url 'login' %}"><label class="login">로그인</label></a>
+      <a href="{% url 'signup' %}"><label class="signup">회원가입</label></a>
+  </div>
+  {% endif %}
+</div>
 
-     <script>
-          $(document).ready(function() {
-              if({{username}}) {
-                $('login-active').show();
-                $('logged-out').hide();
-              }
-              else {
-                $('login-active').hide();
-                $('logged-out').show();
-              };
-          });
+<script>
+  $(document).ready(function() {
+      if({{username}}) {
+        $('login-active').show();
+        $('logged-out').hide();
+      }
+      else {
+        $('login-active').hide();
+        $('logged-out').show();
+      };
+  });
 
+</script>
 
-      </script>
-
-
-
- </header>
-
+</header>
 
 
 <!-- *************************** book: 공통 (HEADER) END  ******************  -->

@@ -8,9 +8,8 @@ urlpatterns = [
     # 테스트 용도
     path('test/', views.test),
 
-    # index / login redirect
+    # Page 1(index) / login redirect
     path('index/', views.index, name='index'),
-    path('read/', views.read, name='read'),
     path('upload/', views.upload, name='upload'),
 
     # users
@@ -18,9 +17,10 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
 
-    # bookList
-    path('editTitle/', views.editTitle, name='editTitle'),
+    # Page 2
+    path('read/', views.read, name='read'),
     path('<pk>/delete/', views.deleteBook, name='delete'),
+    path('bookList/', views.bookList, name='bookList'),
 
 ]
 

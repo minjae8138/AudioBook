@@ -7,11 +7,18 @@ from .forms import UserForm
 from .apps import *
 
 
+# # 파이썬
+# import re
+# import pandas as pd
+# import numpy as np
+
+
 # 파이썬
 import re
 import pandas as pd
 import numpy as np
 import subprocess
+
 
 
 # 모델
@@ -188,7 +195,7 @@ def get_tts_voice(book_text):
                         '-d', book_text], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
     output, err = res.communicate()
 
-    f = open('./audio/book_final.wav', 'wb')
+    f = open('../audio/book_fina.wav', 'wb')
     # print(output)
     f.write(output)
     f.close()
@@ -212,11 +219,11 @@ def upload(request) :
     print("book_name",book_name)
 
     # bookTb에 파일 정보 저장
-    book = BookTb(
-        user =  user_id,
-        book_name = book_name
-    )
-    book.save()
+    # book = BookTb(
+    #     user =  user_id,
+    #     book_name = book_name
+    # )
+    # book.save()
 
     # 인코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
     try :
@@ -293,21 +300,21 @@ def upload(request) :
 
 
     fin_text_list = get_book_evaluation_predict(fin)
-
+    print(fin_text_list)
 
     # contentTb에 데이터 저장
-    cnt = 0
-    for i in range(len(fin)) :
-        # print("fin[i]------------>",fin[i], fin[i][1])
-        cnt += 1
-        cont = ContentTb(
-            sentence_id = cnt,
-            text = fin_text_list[i][0],
-            feeling = fin_text_list[i][1],
-            book = book
-        )
-        cont.save()
-        print("cont------------>",cont)
+    # cnt = 0
+    # for i in range(len(fin)) :
+    #     # print("fin[i]------------>",fin[i], fin[i][1])
+    #     cnt += 1
+    #     cont = ContentTb(
+    #         sentence_id = cnt,
+    #         text = fin_text_list[i][0],
+    #         feeling = fin_text_list[i][1],
+    #         book = book
+    #     )
+    #     cont.save()
+    #     print("cont------------>",cont)
 
     return redirect('read')
 
@@ -344,11 +351,6 @@ def read(request):
 
 
 
-# 책이름 수정
-
-def editTitle(request):
-    pass
-
 
 # 동화책 삭제
 
@@ -358,7 +360,31 @@ def deleteBook(request, pk):
     bookContents.delete()
     bookTitle.delete()
     return redirect('read')
-       
+
+
+
+
+
+
+def bookList(request) :
+    if request.session.get('user_id') and request.session.get('name'):
+        username = request.session['name']
+        users = UserTb.objects.get(user_id=request.session['user_id'])
+        books = BookTb.objects.all().filter(user=request.session['user_id'])
+
+
+        bookname = request.POST.get('getBookName')
+
+        book_info = BookTb.objects.values_list().filter(book_name=bookname)
+        contents = ContentTb.objects.values().filter(book=book_info[0][0])
+        print("contents------->",contents)
+        context = {
+            'username': username,
+            'users': users,
+            'contents': contents,
+            'books': books,
+        }
+    return render(request, 'page2.html', context)
 
 
 
@@ -402,7 +428,6 @@ def login(request):
         form = LoginForm(request.POST)
         user_id = request.POST['user_id']
         pw = request.POST['pw']
-        # 앞이 db 컬럼, 뒤가 받아오는 정보
         user = UserTb.objects.get(user_id = user_id, pw = pw)
         print('user - ', user)
 
