@@ -47,5 +47,8 @@ class LoginForm(forms.ModelForm):
         model = UserTb
         fields = ['user_id', 'pw']
         widgets = {
+            'user_id' : forms.TextInput(
+                attrs={'autocomplete': 'off'},
+            ),
             'pw' : forms.PasswordInput(),
         }

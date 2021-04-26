@@ -162,3 +162,17 @@ audio {
   width: 20px;
   height: 20px;
 }
+
+
+.list-no-item{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  min-height: 100px;
+  margin: auto;
+  padding: 10px;
+  padding-bottom: 13px;
+  color: white;
+ }
+

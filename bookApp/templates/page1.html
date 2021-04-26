@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-{% load static%}
-{% include 'header.html' %}
+{% include 'title.html' %}
+{% load static %}
+<link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
 
-<!--  page1에 적용하는 css-->
-    <link href="{% static 'css/style.css'%}" rel="stylesheet">
-  </head>
+<!--<style>-->
+<!--    style 추가 여기에-->
+<!--</style>-->
+
+{% include 'header.html' %}
 
 <!-- *************************** book : 화면 START *************************  -->
 
-    <div class="main">
-      <div class="ment">동화책을 올려주세요 !!!</div>
+<div class="main">
+  <div class="ment">동화책을 올려주세요 !!!</div>
 
-      <!-- 데이터 전송 -->
+  <!-- 데이터 전송 -->
 <!--      <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data">-->
 <!--        {% csrf_token %}-->
 
@@ -25,22 +27,20 @@
 <!--        </div>-->
 <!--        <div class="submit"><input type="submit" value="음성변환" /></div>-->
 <!--      </form>-->
-      <!-- 데이터 전송 -->
-      <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data" onsubmit="return loginCheck();">
-        {% csrf_token %}
-        <input type="file" id="files" name="text" />
+  <!-- 데이터 전송 -->
+  <form class="file-upload"  action="{% url 'upload' %}" method="post" enctype="multipart/form-data" onsubmit="return loginCheck();">
+    {% csrf_token %}
+    <input type="file" id="files" name="text" />
 <!--        BookTb의 book_name으로 동화제목 저장 필요-->
-        <input type="text" id="bookname" name="bookname"/>
-        <div class="submit"><input type="submit" value="음성변환" /></div>
+    <input type="text" id="bookname" name="bookname"/>
+    <div class="submit"><input type="submit" value="음성변환" /></div>
 
-      </form>
+  </form>
 
-
-
-    </div>
+</div>
 
 <!-- *************************** book : 화면 END ***************************  -->
-  {% include 'footer.html' %}
+
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script  src="{% static 'js/drag.js'%}"></script>
   <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
@@ -60,3 +60,6 @@
   <!--        loginCheck()-->
 
   </script>
+
+
+{% include 'footer.html' %}

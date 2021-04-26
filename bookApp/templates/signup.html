@@ -1,45 +1,46 @@
-<!DOCTYPE html>
-{% load static%}
+{% include 'title.html' %}
+{% load static %}
+<link href="{% static 'css/login.css' %}" type="text/css" rel="stylesheet">
+
+<!--<style>-->
+<!--    style 추가 여기에-->
+<!--</style>-->
+
 {% include 'header.html' %}
 <!-- *************************** book : 화면 START *************************  -->
 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Signup Page</title>
-</head>
-
-
-
-<body>
 
 <div class="container">
-    <div class="row">
-        <h4>Signup</h4>
-    </div>
-    <form method="post" autocomplete="off">
-<!--    placeholder 쓸까요?-->
-        {% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        <br>
-        <div>
-            <input type="submit" class="btn" value="제출하기"/>
-        </div>
 
-    </form>
+    <div class="row">
+        <h4>회원가입</h4>
+    </div>
+
+    <div class="container-form">
+
+        <form method="post" class="form" autocomplete="off">
+            <!--    placeholder 쓸까요?-->
+            {% csrf_token %}
+            <table class="table-form">
+                {{form.as_table}}
+            </table>
+
+            <div class="btn-submit">
+                <input type="submit" class="btn-form" value="제출하기"/>
+            </div>
+
+        </form>
+
+
+    </div>
+
 </div>
 
 
 
-</body>
-
-
-</html>
-
-
 <!-- *************************** book : 화면 END ***************************  -->
-{% include 'footer.html' %}
+
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script  src="{% static 'js/drag.js
+<script  src="{% static 'js/drag.js'%}"></script>
+{% include 'footer.html' %}

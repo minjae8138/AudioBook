@@ -29,7 +29,7 @@ class ContentTb(models.Model):
 
 
 class UserTb(models.Model):
-    user_id = models.CharField(db_column='USER_ID', primary_key=True, max_length=30, verbose_name="사용자 아이디")  # Field name made lowercase.
+    user_id = models.CharField(db_column='USER_ID', primary_key=True, max_length=30, verbose_name="아이디")  # Field name made lowercase.
     pw = models.CharField(db_column='PW', max_length=30, verbose_name="비밀번호")  # Field name made lowercase.
     name = models.CharField(db_column='NAME', max_length=30, verbose_name="별명")  # Field name made lowercase.
     e_mail = models.CharField(db_column='E_MAIL', max_length=50, verbose_name="이메일")  # Field name made lowercase.

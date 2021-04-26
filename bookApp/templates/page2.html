@@ -1,111 +1,90 @@
-<!DOCTYPE html>
-{% load static%}
+
+{% include 'title.html' %}
+{% load static %}
+<link href="{% static 'css/style2.css' %}" type="text/css" rel="stylesheet">
+
+<!--<style>-->
+<!--    style 추가 여기에-->
+<!--</style>-->
+
 {% include 'header.html' %}
 
 <!-- *************************** book : 화면 START *************************  -->
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="{% static 'css/style2.css'%}" rel="stylesheet">
 
-
-<!--이거 css/style2.css에 넣어주세요!(protection 걸려있네요)-->
-<style>
-
-.list-no-item{
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  width: 100%;
-  min-height: 100px;
-  margin: auto;
-  padding: 10px;
-  padding-bottom: 13px;
-  color: white;
- }
-
-</style>
-
-
-</head>
-
-<body>
-  <div class="container">
-    <div class="left">
-      <div class="left-one">
-        <div class="audios">
-          <div class="container-male">
-            <div class="top-2" name="audio bar">
-              <audio id="audio-male" controls>
-                <source src="{% static 'src/sample_audio_1.mp3' %}">
-              </audio>
-            </div>
-          </div>
-
-          <div class="container-female hidden">
-
-            <div class="top-2" name="audio bar">
-              <audio id="audio-female" controls>
-                <source src="{% static 'src/sample_audio_2.mp3' %}">
-              </audio>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="bottom">
-
-            <div class="bottom-1" name="speakers-grp">
-              <button class="btn-male clicked">남자목소리</button>
-              <button class="btn-female">여자목소리</button>
-            </div>
-
+<div class="container">
+<div class="left">
+  <div class="left-one">
+    <div class="audios">
+      <div class="container-male">
+        <div class="top-2" name="audio bar">
+          <audio id="audio-male" controls>
+            <source src="{% static 'src/sample_audio_1.mp3' %}">
+          </audio>
         </div>
       </div>
 
-      <div class="box"><br>
-        {% if contents %}
-          {%  for content in  contents   %}
+      <div class="container-female hidden">
 
-              {{content.text}}
-          {%    endfor    %}
-        {% else %}
-          <p>  데이터가 존재하지 않습니다. </p>
-        {% endif %}
+        <div class="top-2" name="audio bar">
+          <audio id="audio-female" controls>
+            <source src="{% static 'src/sample_audio_2.mp3' %}">
+          </audio>
+        </div>
       </div>
     </div>
-    <div class="right">
-      <div class="container-list">
-        <div class="top-list">
-          <h3>나의 동화책 모음</h3>
+
+
+    <div class="bottom">
+
+        <div class="bottom-1" name="speakers-grp">
+          <button class="btn-male clicked">남자목소리</button>
+          <button class="btn-female">여자목소리</button>
         </div>
-        <br>
+
+    </div>
+  </div>
+
+  <div class="box"><br>
+    {% if contents %}
+      {%  for content in  contents   %}
+
+          {{content.text}}
+      {%    endfor    %}
+    {% else %}
+      <p>  데이터가 존재하지 않습니다. </p>
+    {% endif %}
+  </div>
+</div>
+<div class="right">
+  <div class="container-list">
+    <div class="top-list">
+      <h3>나의 동화책 모음</h3>
+    </div>
+    <br>
 
 <!--          login session id 받아서 BookTb user_id 일치하는 것만 표시-->
-        <div class="book-list">
-            {%  for book in books  %}
-                {% if book.book_name %}
-                    <div class="list-item">
-                        {{book.book_name}}
-                        <div class="btns">
-                            <a href="#" class="editTitle"><span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span></a>
-                            <a href="{% url 'delete' pk=book.pk %}" class="deleteBook"><span><img class="delBtn" src="{% static 'src/delete.png' %}"></span></a>
-                        </div>
+    <div class="book-list">
+        {%  for book in books  %}
+            {% if book.book_name %}
+                <div class="list-item">
+                    {{book.book_name}}
+                    <div class="btns">
+                        <a href="#" class="editTitle"><span><img class="editBtn" src="{% static 'src/edit.png' %}" ></span></a>
+                        <a href="{% url 'delete' pk=book.pk %}" class="deleteBook"><span><img class="delBtn" src="{% static 'src/delete.png' %}"></span></a>
                     </div>
-                {% else %}
-                    <div class="list-no-item">
-                        <div class="btns">
-                        </div>
+                </div>
+            {% else %}
+                <div class="list-no-item">
+                    <div class="btns">
                     </div>
-                {% endif %}
-            {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
 
-        </div>
+    </div>
 
-        <div class="delete-later">
+    <div class="delete-later">
 <!--        <div class="book-list">-->
 <!--            <div class="list-item">-->
 <!--              빨간모자-->
@@ -205,10 +184,10 @@
 <!--                <span><img class="delBtn" src="{% static 'src/delete.png' %}"></span>-->
 <!--              </div>-->
 <!--            </div>-->
-        </div>
-      </div>
     </div>
   </div>
+</div>
+</div>
 
 
 
@@ -236,17 +215,12 @@
 
 </script>
 
-</body>
-
-
-
-
-</html>
-
-
-
-
 
 <!-- *************************** book : 화면 END ***************************  -->
-  {% include 'footer.html' %}
+
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script  src="{% static 'js/drag.js'%}"></script>
+
+
+{% include 'footer.html' %}
 

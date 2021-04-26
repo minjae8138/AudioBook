@@ -344,11 +344,6 @@ def read(request):
 
 
 
-# 책이름 수정
-
-def editTitle(request):
-    pass
-
 
 # 동화책 삭제
 
@@ -402,7 +397,6 @@ def login(request):
         form = LoginForm(request.POST)
         user_id = request.POST['user_id']
         pw = request.POST['pw']
-        # 앞이 db 컬럼, 뒤가 받아오는 정보
         user = UserTb.objects.get(user_id = user_id, pw = pw)
         print('user - ', user)
 
