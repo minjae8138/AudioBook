@@ -1,15 +1,24 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from .models import *
 from .forms import UserForm
 from .apps import *
+
 #
 # # 파이썬
 # import re
 # import pandas as pd
 # import numpy as np
+
+
+# 파이썬
+import re
+import pandas as pd
+import numpy as np
+import subprocess
+
 
 
 # 모델
@@ -102,6 +111,7 @@ def del_useless(text_list, del_list):
 #
 #     return test_file
 
+# 모델 불러와서 감정 예측하는 함수
 def get_book_evaluation_predict(text_list):
     print("start_predict")
     text_feeling_list = []
@@ -131,6 +141,66 @@ def get_book_evaluation_predict(text_list):
     print(text_feeling_list)
     return text_feeling_list
 
+# tts합성을 위한 ssml태그 문자열 생성
+def get_tts_text(text_feeling_lists):
+    book_text = "<speak>"
+    pre = 9999
+    b1,b2,b3,b4,b5 = 3,3,3,3,3
+
+    for text_feeling_list in text_feeling_lists:
+        text = text_feeling_list[0]
+        sentiment = text_feeling_list[1]
+        if sentiment == 0:
+            bgm = ''
+        if sentiment == 1:
+            bgm = '<audio src="http://116.44.136.77/1peace.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b1),
+                                                                                                        str(b1 + 3))
+            b1 += 3
+        if sentiment == 2:
+            bgm = '<audio src="http://116.44.136.77/2angry.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b2),
+                                                                                                        str(b2 + 3))
+            b2 += 3
+        if sentiment == 3:
+            bgm = '<audio src="http://116.44.136.77/3veryangry.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b3),
+                                                                                                            str(
+                                                                                                                b3 + 3))
+            b3 += 3
+        if sentiment == 4:
+            bgm = '<audio src="http://116.44.136.77/4sad.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b4),
+                                                                                                      str(b4 + 3))
+            b4 += 4
+        if sentiment == 5:
+            bgm = '<audio src="http://116.44.136.77/5janjan.mp3" clipBegin="{}s" clipEnd="{}s"/>'.format(str(b5),
+                                                                                                         str(
+                                                                                                             b5 + 3))
+            b5 += 5
+        sentence_text = '<voice name="WOMAN_DIALOG_BRIGHT"><prosody rate="slow" volume="loud">' + bgm + text + '</prosody></voice>'
+        book_text = book_text + sentence_text
+
+    book_text = book_text + "</speak>"
+    print(book_text)
+
+    return book_text
+
+
+# ssml텍스트 태그를 기반으로 음성합성 서비스
+# 민재 b4e5257e61f7df0c8994a5d5eaf6ff58
+# 창훈 2607c58891135f8fdd19a8d0206e9f2f
+def get_tts_voice(book_text):
+
+    url = "https://kakaoi-newtone-openapi.kakao.com/v1/synthesize"
+    key = "2607c58891135f8fdd19a8d0206e9f2f"
+    res = subprocess.Popen(['curl', '-v', '-X', 'POST', url,
+                        '-H', "Content-Type: application/xml",
+                        '-H', "Authorization:"+key,
+                        '-d', book_text], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+    output, err = res.communicate()
+
+    f = open('./audio/book_final.wav', 'wb')
+    # print(output)
+    f.write(output)
+    f.close()
+    print(err)
 
 
 
@@ -173,6 +243,62 @@ def upload(request) :
     mid = re.split('[".]', r_cont)
     fin_list = del_useless(mid, ['', ' ', '  ' '.', "“", "”"])
     fin = fin_list[:]
+    # 감정예측
+    text_feeling_lists = get_book_evaluation_predict(fin)
+    # ssml 태그 생성
+    book_text = get_tts_text(text_feeling_lists)
+    # ssml 태그기반 음성합성 실시
+    get_tts_voice(book_text)
+
+    # print(fin)
+    # 모델 적용 후 DB에 저장
+
+    # for i in range(len(fin)) :
+    #     print(i,fin[i])
+
+
+    # book_id 채번
+    # ---------------------------
+
+
+    # 책번호 : B + '00001'
+    # new_bookid= 'B' + '00001'
+
+    # od = 1
+
+    # 책번호
+    # if od:
+    #     a = od[0]['max_bookid']
+    #     new_bookid = 'B' +  str(int(a[2:]) + 1).zfill(5)
+
+
+    ##############
+    ## contenttb에 저장 테스트 버전전
+    # cont = ContentTb(
+    #     # content_id= id,
+    #     sentence_id = 500,
+    #     text = "테스트",
+    #     feelring = 3,
+    #     book = book
+    # )
+    # cont.save()
+
+    # content_tb에 데이터 저장
+    # cnt = 0
+    # for i in range(len(fin)) :
+    #     print("fin[i]------------>",fin[i], fin[i][1])
+    #     # if str(fin[i][1]).isdigit() :
+    #     cnt += 1
+    #     cont = ContentTb(
+    #         sentence_id = cnt,
+    #         text = fin[i][0],
+    #         feelring = fin[i][1],
+    #         book = book
+    #
+    #     )
+    #     cont.save()
+    #     print("cont------------>",cont)
+
 
     fin_text_list = get_book_evaluation_predict(fin)
     print(fin_text_list)
@@ -213,11 +339,13 @@ def read(request):
         book_info = BookTb.objects.values_list().filter(user=users)
         n_len = len(book_info)
         contents = ContentTb.objects.values().filter(book = book_info[n_len-1][0])
+
         context = {
             'username': username,
             'users': users,
             'contents': contents,
             'books': books,
+            # 'book_id': book_id,
         }
         print('logged in - ', request.session['user_id'])
         return render(request, 'page2.html', context)
@@ -232,11 +360,13 @@ def editTitle(request):
 
 # 동화책 삭제
 
-def deleteBook(request, book_id):
-    book = BookTb.objects.get(pk=book_id)
-    book.delete()
+def deleteBook(request, pk):
+    bookTitle = get_object_or_404(BookTb, pk=pk)
+    bookContents = ContentTb.objects.all().filter(book=pk)
+    bookContents.delete()
+    bookTitle.delete()
     return redirect('read')
-
+       
 
 
 
