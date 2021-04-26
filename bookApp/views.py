@@ -6,6 +6,7 @@ from .models import *
 from .forms import UserForm
 from .apps import *
 
+
 # 파이썬
 import re
 import pandas as pd
@@ -66,7 +67,6 @@ def index(request):
         print('login needed - ', request.session['user_id'])
 
         return render(request, 'page1.html')
-
 
 
 
