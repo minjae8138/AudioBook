@@ -1,0 +1,66 @@
+absl-py==0.12.0
+asgiref @ file:///tmp/build/80754af9/asgiref_1617740417847/work
+astunparse==1.6.3
+cachetools==4.2.1
+certifi==2020.12.5
+chardet==4.0.0
+click==7.1.2
+Django @ file:///tmp/build/80754af9/django_1617740316746/work
+filelock==3.0.12
+flatbuffers==1.12
+gast==0.3.3
+google-auth==1.29.0
+google-auth-oauthlib==0.4.4
+google-pasta==0.2.0
+grpcio==1.32.0
+h5py==2.10.0
+idna==2.10
+importlib-metadata==4.0.1
+joblib==1.0.1
+Keras-Preprocessing==1.1.2
+Markdown==3.3.4
+mkl-fft==1.3.0
+mkl-random @ file:///C:/ci/mkl_random_1618854593605/work
+mkl-service==2.3.0
+mysqlclient==2.0.1
+numpy==1.19.5
+oauthlib==3.1.0
+opencv-python==4.5.1.48
+opt-einsum==3.3.0
+packaging==20.9
+pandas @ file:///C:/ci/pandas_1618365631664/work
+Pillow==8.2.0
+protobuf==3.15.8
+psycopg2 @ file:///C:/ci/psycopg2_1612298715048/work
+pyasn1==0.4.8
+pyasn1-modules==0.2.8
+pymongo==3.11.3
+pyparsing==2.4.7
+python-dateutil @ file:///home/ktietz/src/ci/python-dateutil_1611928101742/work
+pytz @ file:///tmp/build/80754af9/pytz_1612215392582/work
+regex==2021.4.4
+requests==2.25.1
+requests-oauthlib==1.3.0
+rsa==4.7.2
+sacremoses==0.0.45
+sentencepiece==0.1.95
+six @ file:///C:/ci/six_1605205426665/work
+sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
+tensorboard==2.5.0
+tensorboard-data-server==0.6.0
+tensorboard-plugin-wit==1.8.0
+tensorflow==2.4.1
+tensorflow-estimator==2.4.0
+termcolor==1.1.0
+tokenizers==0.10.2
+torch==1.8.1+cpu
+torchaudio==0.8.1
+torchvision==0.9.1+cpu
+tqdm==4.60.0
+transformers==4.5.1
+typing-extensions==3.7.4.3
+urllib3==1.26.4
+Werkzeug==1.0.1
+wincertstore==0.2
+wrapt==1.12.1
+zipp==3.4.1
