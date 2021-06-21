@@ -213,7 +213,7 @@ def get_tts_man_text(text_feeling_lists):
                                                                                                          str(
                                                                                                              b5 + 3))
             b5 += 5
-        sentence_text = '<voice name="MAN_DIALOG_BRIGHT"><prosody rate="slow" volume="loud">' + bgm + text + '</prosody></voice>'
+        sentence_text = '<voice name="MAN_DIALOG_BRIGHT"><prosody rate="slow" volume="loud">' + bgm + text +' '+ '</prosody></voice>'
         book_text = book_text + sentence_text
 
     book_text = book_text + "</speak>"
@@ -224,10 +224,10 @@ def get_tts_man_text(text_feeling_lists):
 # ssml텍스트 태그를 기반으로 음성합성 서비스
 # 민재 b4e5257e61f7df0c8994a5d5eaf6ff58
 # 창훈 2607c58891135f8fdd19a8d0206e9f2f
-def get_tts_woman_voice(book_text):
+def get_tts_woman_voice(book_text,book_name):
 
     url = "https://kakaoi-newtone-openapi.kakao.com/v1/synthesize"
-    key = "2607c58891135f8fdd19a8d0206e9f2f"
+    key = "b4e5257e61f7df0c8994a5d5eaf6ff58"
     res = subprocess.Popen(['curl', '-v', '-X', 'POST', url,
                         '-H', "Content-Type: application/xml",
                         '-H', "Authorization:"+key,
@@ -235,14 +235,14 @@ def get_tts_woman_voice(book_text):
     output, err = res.communicate()
 
 
-    f = open('../audio/woman.wav', 'wb')
+    f = open('../audio/{}_woman.wav'.format(book_name), 'wb')
 
     # print(output)
     f.write(output)
     f.close()
     print(err)
 
-def get_tts_man_voice(book_text):
+def get_tts_man_voice(book_text,book_name):
 
     url = "https://kakaoi-newtone-openapi.kakao.com/v1/synthesize"
     key = "2607c58891135f8fdd19a8d0206e9f2f"
@@ -252,7 +252,7 @@ def get_tts_man_voice(book_text):
                         '-d', book_text], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
     output, err = res.communicate()
 
-    f = open('../audio/man.wav', 'wb')
+    f = open('../audio/{}_man.wav'.format(book_name), 'wb')
     # print(output)
     f.write(output)
     f.close()
@@ -275,11 +275,11 @@ def upload(request) :
     print("book_name",book_name)
 
     # bookTb에 파일 정보 저장
-    # book = BookTb(
-    #     user =  user_id,
-    #     book_name = book_name
-    # )
-    # book.save()
+    book = BookTb(
+        user =  user_id,
+        book_name = book_name
+    )
+    book.save()
 
     # 인코딩 작업 - 현재는 utf-8 형식의 txt파일만 업로드 가능, ansi 형식 고려x
     try :
@@ -303,10 +303,10 @@ def upload(request) :
     # ssml 태그 생성
     book_text = get_tts_woman_text(text_feeling_lists)
     # ssml 태그기반 음성합성 실시
-    get_tts_woman_voice(book_text)
+    get_tts_woman_voice(book_text,book_name)
 
     book_text = get_tts_man_text(text_feeling_lists)
-    get_tts_man_voice(book_text)
+    get_tts_man_voice(book_text,book_name)
 
     # print(fin)
     # 모델 적용 후 DB에 저장
@@ -362,18 +362,18 @@ def upload(request) :
     print(fin_text_list)
 
     # contentTb에 데이터 저장
-    # cnt = 0
-    # for i in range(len(fin)) :
-    #     # print("fin[i]------------>",fin[i], fin[i][1])
-    #     cnt += 1
-    #     cont = ContentTb(
-    #         sentence_id = cnt,
-    #         text = fin_text_list[i][0],
-    #         feeling = fin_text_list[i][1],
-    #         book = book
-    #     )
-    #     cont.save()
-    #     print("cont------------>",cont)
+    cnt = 0
+    for i in range(len(fin)) :
+        # print("fin[i]------------>",fin[i], fin[i][1])
+        cnt += 1
+        cont = ContentTb(
+            sentence_id = cnt,
+            text = fin_text_list[i][0],
+            feeling = fin_text_list[i][1],
+            book = book
+        )
+        cont.save()
+        print("cont------------>",cont)
 
     return redirect('read')
 
@@ -396,6 +396,10 @@ def read(request):
         # book_info - user_id의 여러 책중 특정 책을 가져오기 위해 리스트 형식에서 추출하기 위해 필요
         book_info = BookTb.objects.values_list().filter(user=users)
         n_len = len(book_info)
+        print(users)
+        print(books)
+        print(book_info)
+        print(len(book_info), n_len)
         contents = ContentTb.objects.values().filter(book = book_info[n_len-1][0])
 
         context = {
